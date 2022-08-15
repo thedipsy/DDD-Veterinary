@@ -11,11 +11,14 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "patient")
-public class Patient extends AbstractEntity<PatientId> {
+@Table(name = "animal")
+public class Animal extends AbstractEntity<PatientId> {
 
+    @Column(nullable = false)
     private String name;
     private Date birthDate;
+
+    @Column(nullable = false)
     private AnimalSpecie animalSpecie;
     private String breed;
 
@@ -26,12 +29,13 @@ public class Patient extends AbstractEntity<PatientId> {
     private Microchip microchip;
 
     @AttributeOverrides({
-            @AttributeOverride(name="baseUnit", column = @Column(name="weight_baseUnit")),
-            @AttributeOverride(name="amount", column = @Column(name="weight_amount"))
+            @AttributeOverride(name="baseUnit", column = @Column(name="weight_baseUnit", nullable = false)),
+            @AttributeOverride(name="amount", column = @Column(name="weight_amount", nullable = false))
     })
     private Weight weight;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Gender gender;
 
 }

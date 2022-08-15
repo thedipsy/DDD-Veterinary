@@ -4,8 +4,8 @@ import mk.ukim.finki.emt.veterinary.patients.domain.models.id.OwnerId;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.valueobjects.Address;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "owner")
@@ -17,4 +17,6 @@ public class Owner extends AbstractEntity<OwnerId> {
     private String email;
     private Address address;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Animal> animalsList;
 }

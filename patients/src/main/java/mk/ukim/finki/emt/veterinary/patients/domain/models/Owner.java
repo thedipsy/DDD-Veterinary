@@ -1,6 +1,6 @@
-package mk.ukim.finki.emt.veterinary.patients.domain.entitites;
+package mk.ukim.finki.emt.veterinary.patients.domain.models;
 
-import mk.ukim.finki.emt.veterinary.patients.domain.entitites.id.OwnerId;
+import mk.ukim.finki.emt.veterinary.patients.domain.models.id.OwnerId;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.valueobjects.Address;
 

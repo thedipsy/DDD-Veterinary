@@ -1,8 +1,8 @@
-package mk.ukim.finki.emt.veterinary.patients.domain.entitites;
+package mk.ukim.finki.emt.veterinary.patients.domain.models;
 
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.AnimalSpecie;
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.Gender;
-import mk.ukim.finki.emt.veterinary.patients.domain.entitites.id.PatientId;
+import mk.ukim.finki.emt.veterinary.patients.domain.models.id.PatientId;
 import mk.ukim.finki.emt.veterinary.patients.domain.valueobjects.Microchip;
 import mk.ukim.finki.emt.veterinary.patients.domain.valueobjects.Weight;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.base.AbstractEntity;

@@ -1,8 +1,8 @@
-package mk.ukim.finki.emt.veterinary.veterinary.domain.models.entities;
+package mk.ukim.finki.emt.veterinary.veterinary.domain.models;
 
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.valueobjects.Address;
-import mk.ukim.finki.emt.veterinary.veterinary.domain.models.entities.id.VeterinarianId;
+import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinarianId;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

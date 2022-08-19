@@ -1,5 +1,6 @@
 package mk.ukim.finki.emt.veterinary.veterinary.domain.models;
 
+import lombok.Getter;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.valueobjects.Address;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinarianId;
@@ -10,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "veterinarian")
+@Getter
 public class Veterinarian extends AbstractEntity<VeterinarianId> {
 
     private String name;
@@ -23,4 +25,13 @@ public class Veterinarian extends AbstractEntity<VeterinarianId> {
         super(VeterinarianId.randomId(VeterinarianId.class));
     }
 
+    public Veterinarian(String name, String surname, String email, String phone, Address address, Date dateOfEmployment) {
+        super(VeterinarianId.randomId(VeterinarianId.class));
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.dateOfEmployment = dateOfEmployment;
+    }
 }

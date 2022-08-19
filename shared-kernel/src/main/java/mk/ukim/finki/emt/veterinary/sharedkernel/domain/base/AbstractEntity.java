@@ -1,5 +1,6 @@
 package mk.ukim.finki.emt.veterinary.sharedkernel.domain.base;
 
+import lombok.Getter;
 import lombok.NonNull;
 import org.springframework.data.util.ProxyUtils;
 
@@ -8,6 +9,7 @@ import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
 @MappedSuperclass
+@Getter
 public class AbstractEntity<ID extends DomainObjectId>  {
 
     @EmbeddedId

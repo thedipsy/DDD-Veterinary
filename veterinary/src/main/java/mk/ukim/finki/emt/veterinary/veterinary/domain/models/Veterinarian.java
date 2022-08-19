@@ -19,4 +19,8 @@ public class Veterinarian extends AbstractEntity<VeterinarianId> {
     private Address address;
     private Date dateOfEmployment;
 
+    public Veterinarian(){
+        super(VeterinarianId.randomId(VeterinarianId.class));
+    }
+
 }

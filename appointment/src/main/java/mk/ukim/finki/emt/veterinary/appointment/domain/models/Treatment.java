@@ -16,4 +16,8 @@ public class Treatment extends AbstractEntity<TreatmentId> {
     private String description;
     private Prescription dosage;
 
+    public Treatment(){
+        super(TreatmentId.randomId(TreatmentId.class));
+    }
+
 }

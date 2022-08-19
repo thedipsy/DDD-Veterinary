@@ -19,4 +19,9 @@ public class Owner extends AbstractEntity<OwnerId> {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Animal> animalsList;
+
+    public Owner(){
+        super(OwnerId.randomId(OwnerId.class));
+    }
+
 }

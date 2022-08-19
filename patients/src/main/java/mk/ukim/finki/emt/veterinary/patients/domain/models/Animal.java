@@ -2,7 +2,7 @@ package mk.ukim.finki.emt.veterinary.patients.domain.models;
 
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.AnimalSpecie;
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.Gender;
-import mk.ukim.finki.emt.veterinary.patients.domain.models.id.PatientId;
+import mk.ukim.finki.emt.veterinary.patients.domain.models.id.AnimalId;
 import mk.ukim.finki.emt.veterinary.patients.domain.valueobjects.Microchip;
 import mk.ukim.finki.emt.veterinary.patients.domain.valueobjects.Weight;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.base.AbstractEntity;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "animal")
-public class Animal extends AbstractEntity<PatientId> {
+public class Animal extends AbstractEntity<AnimalId> {
 
     @Column(nullable = false)
     private String name;
@@ -37,5 +37,9 @@ public class Animal extends AbstractEntity<PatientId> {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Gender gender;
+
+    public Animal(){
+        super(AnimalId.randomId(AnimalId.class));
+    }
 
 }

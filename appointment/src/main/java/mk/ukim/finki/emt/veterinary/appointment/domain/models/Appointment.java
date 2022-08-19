@@ -33,4 +33,8 @@ public class Appointment extends AbstractEntity<AppointmentId> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Treatment> prescriptionList;
 
+    public Appointment(){
+        super(AppointmentId.randomId(AppointmentId.class));
+    }
+
 }

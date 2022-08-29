@@ -5,6 +5,7 @@ import mk.ukim.finki.emt.veterinary.sharedkernel.domain.valueobjects.Address;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinarian;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,6 +15,6 @@ public class VeterinaryForm {
     private String name;
     @NotNull
     private Address address;
-    private List<Veterinarian> veterinarians;
+    private List<VeterinarianForm> veterinarians = new ArrayList<>();
 
 }

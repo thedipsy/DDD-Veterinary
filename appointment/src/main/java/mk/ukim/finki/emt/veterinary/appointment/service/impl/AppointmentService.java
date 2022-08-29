@@ -59,7 +59,8 @@ public class AppointmentService implements IAppointmentService {
 
 
     //TODO CHECK THIS
-    public AppointmentId makeAppointment(AppointmentForm appointmentForm){
+    @Override
+    public AppointmentId saveAppointment(AppointmentForm appointmentForm){
         Objects.requireNonNull(appointmentForm, "Appointment must not be null");
         var constraintViolations = validator.validate(appointmentForm);
         if (constraintViolations.size() > 0){
@@ -72,7 +73,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     private Appointment toDomainObject(AppointmentForm appointmentForm){
-        var appointment = new Appointment(appointmentForm.getDate(), appointmentForm.getPatientId(), appointmentForm.getVeterinarianId());
+        var appointment = new Appointment(appointmentForm.getDate(), appointmentForm.getPatient().getId(), appointmentForm.getVeterinarian().getId());
         appointmentForm.getTreatmentList()
                 .forEach(treatment -> appointment.addTreatment(
                         treatment.getTreatmentType(),

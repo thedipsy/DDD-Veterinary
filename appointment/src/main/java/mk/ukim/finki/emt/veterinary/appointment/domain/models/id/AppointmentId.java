@@ -18,4 +18,5 @@ public class AppointmentId extends DomainObjectId {
         return p;
     }
 
+
 }

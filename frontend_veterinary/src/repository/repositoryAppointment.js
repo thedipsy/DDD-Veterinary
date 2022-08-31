@@ -7,7 +7,7 @@ const AppointmentService = {
         return axios.get("/appointment")
     },
 
-    getVeterinary: (id) => {
+    getAppointment: (id) => {
         return axios.get(`/owner/${id}`);
     },
 

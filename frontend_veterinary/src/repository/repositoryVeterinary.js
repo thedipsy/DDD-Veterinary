@@ -15,17 +15,27 @@ const VeterinaryService = {
         return axios.delete(`/veterinary/delete/${id}`)
     },
 
-    addVeterinary: (name, address) => {
+    addVeterinary: (name, streetName, houseNumber, city, postalCode) => {
         return axios.post("/veterinary", {
             "name" : name,
-            "address" : address
+            "address" : {
+                "streetName" : streetName,
+                "houseNumber" : houseNumber,
+                "city" : city,
+                "postalCode" : postalCode
+            }
         })
     },
 
-    editVeterinary: (id, name, address) => {
+    editVeterinary: (id, name, streetName, houseNumber, city, postalCode) => {
         return axios.put(`/veterinary/edit/${id}`, {
             "name" : name,
-            "address" : address
+            "address" : {
+                "streetName" : streetName,
+                "houseNumber" : houseNumber,
+                "city" : city,
+                "postalCode" : postalCode
+            }
         });
     },
 

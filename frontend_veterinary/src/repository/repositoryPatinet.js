@@ -6,24 +6,30 @@ const PatientService = {
         return axios.get("/owner")
     },
 
-    getVeterinary: (id) => {
+    getOwner: (id) => {
         return axios.get(`/owner/${id}`);
     },
 
-    deleteVeterinary: (id) => {
+    deleteOwner: (id) => {
         return axios.delete(`/owner/delete/${id}`)
     },
 
-    addVeterinary: (name, address) => {
+    addOwner: (name, surname, phone, email, address) => {
         return axios.post("/owner", {
             "name" : name,
+            "surname" : surname,
+            "phone" : phone,
+            "email" : email,
             "address" : address
         })
     },
 
-    editVeterinary: (id, name, address) => {
+    editOwner: (id, name, surname, phone, email, address) => {
         return axios.put(`/owner/edit/${id}`, {
             "name" : name,
+            "surname" : surname,
+            "phone" : phone,
+            "email" : email,
             "address" : address
         });
     },

@@ -17,7 +17,6 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,8 +32,8 @@ public class VeterinaryService implements IVeterinaryService {
     }
 
     @Override
-    public Optional<Veterinary> findById(VeterinaryId veterinaryId) {
-        return veterinaryRepository.findById(veterinaryId);
+    public Veterinary findById(VeterinaryId veterinaryId) {
+        return veterinaryRepository.findById(veterinaryId).orElseThrow(VeterinarianNotExistsException::new);
     }
 
     @Override
@@ -48,6 +47,25 @@ public class VeterinaryService implements IVeterinaryService {
         var veterinaryToSave = toDomainObject(veterinaryForm);
         var newVeterinary = veterinaryRepository.saveAndFlush(veterinaryToSave);
         return newVeterinary.getId();
+    }
+
+
+    @Override
+    public VeterinaryId editVeterinary(VeterinaryId veterinaryId, VeterinaryForm veterinaryForm) {
+        Veterinary veterinary = findById(veterinaryId);
+        Objects.requireNonNull(veterinaryForm, "Veterinary must not be null");
+        var constraintViolations = validator.validate(veterinaryForm);
+        if(constraintViolations.size() > 0){
+            throw new ConstraintViolationException("The veterinary form is not valid", constraintViolations);
+        }
+
+        var veterinaryToSave = toDomainObject(veterinaryForm);
+        veterinary.setName(veterinaryToSave.getName());
+        veterinary.setAddress(veterinaryToSave.getAddress());
+        veterinary.setVeterinarians(veterinaryToSave.getVeterinarians());
+
+        var savedVeterinary = veterinaryRepository.saveAndFlush(veterinary);
+        return savedVeterinary.getId();
     }
 
     private Veterinary toDomainObject(VeterinaryForm veterinaryForm){
@@ -68,7 +86,7 @@ public class VeterinaryService implements IVeterinaryService {
 
     @Override
     public void deleteVeterinary(VeterinaryId veterinaryId) throws VeterinaryNotExistsException {
-        if(findById(veterinaryId).isPresent()) {
+        if(findById(veterinaryId) != null) {
             veterinaryRepository.deleteById(veterinaryId);
         } else{
             throw new VeterinaryNotExistsException();
@@ -77,7 +95,7 @@ public class VeterinaryService implements IVeterinaryService {
 
     @Override
     public void addVeterinarian(VeterinaryId veterinaryId, VeterinarianForm veterinarianForm) throws VeterinaryNotExistsException {
-        Veterinary veterinary = findById(veterinaryId).orElseThrow(VeterinaryNotExistsException::new);
+        Veterinary veterinary = findById(veterinaryId);
         veterinary.addVeterinarian(
                 veterinarianForm.getName(),
                 veterinarianForm.getSurname(),
@@ -92,7 +110,7 @@ public class VeterinaryService implements IVeterinaryService {
 
     @Override
     public void deleteVeterinarian(VeterinaryId veterinaryId, VeterinarianId veterinarianId) throws VeterinaryNotExistsException, VeterinarianNotExistsException {
-        Veterinary veterinary = findById(veterinaryId).orElseThrow(VeterinaryNotExistsException::new);
+        Veterinary veterinary = findById(veterinaryId);
         veterinary.removeVeterinarian(veterinarianId);
 
         veterinaryRepository.saveAndFlush(veterinary);

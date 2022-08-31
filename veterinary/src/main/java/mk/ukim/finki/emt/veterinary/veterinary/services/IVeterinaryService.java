@@ -9,15 +9,15 @@ import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinarianForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinaryForm;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IVeterinaryService {
 
     List<Veterinary> findAll();
-    Optional<Veterinary> findById(VeterinaryId veterinaryId);
+    Veterinary findById(VeterinaryId veterinaryId);
     void addVeterinarian(VeterinaryId veterinaryId, VeterinarianForm veterinarianForm) throws VeterinaryNotExistsException;
     void deleteVeterinarian(VeterinaryId veterinaryId, VeterinarianId veterinarianId) throws VeterinaryNotExistsException, VeterinarianNotExistsException;
     VeterinaryId saveVeterinary(VeterinaryForm veterinaryForm);
-    void deleteVeterinary(VeterinaryId VeterinaryId) throws  VeterinaryNotExistsException;
+    void deleteVeterinary(VeterinaryId VeterinaryId) throws VeterinaryNotExistsException;
+    VeterinaryId editVeterinary(VeterinaryId veterinaryId, VeterinaryForm veterinaryForm) throws  VeterinaryNotExistsException;
 
 }

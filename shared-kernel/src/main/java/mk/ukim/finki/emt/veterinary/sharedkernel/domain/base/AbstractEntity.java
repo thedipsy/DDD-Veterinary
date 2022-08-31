@@ -5,6 +5,8 @@ import lombok.NonNull;
 import org.springframework.data.util.ProxyUtils;
 
 import javax.persistence.EmbeddedId;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
@@ -13,6 +15,7 @@ import java.util.Objects;
 public class AbstractEntity<ID extends DomainObjectId>  {
 
     @EmbeddedId
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id;
 
     protected AbstractEntity() {

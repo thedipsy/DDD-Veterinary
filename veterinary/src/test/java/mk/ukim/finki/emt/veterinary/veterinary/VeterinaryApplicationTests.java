@@ -27,7 +27,7 @@ class VeterinaryApplicationTests {
         veterinaryForm.setAddress(Address.build("9ti maj", "36", "Skopje", "7500"));
 
         VeterinaryId veterinaryId = veterinaryService.saveVeterinary(veterinaryForm);
-        Veterinary veterinary = veterinaryService.findById(veterinaryId).orElseThrow(VeterinaryNotExistsException::new);
+        Veterinary veterinary = veterinaryService.findById(veterinaryId);
         System.out.println("succeeded");
     }
 

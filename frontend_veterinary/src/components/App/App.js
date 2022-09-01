@@ -11,8 +11,9 @@ import VeterinaryService from "../../repository/repositoryVeterinary";
 import VeterinaryAdd from "../Veterinary/VeterinaryAdd/veterinaryAdd";
 import VeterinaryEdit from "../Veterinary/VeterinaryEdit/veterinaryEdit";
 import Veterinaries from "../Veterinary/VeterinaryList/veterinaries";
+import VeterinarianAdd from "../Veterinary/VeterinarianAdd/veterinarianAdd";
+import VeterinaryView from "../Veterinary/VeterinaryView/veterinaryView";
 
-import VeterinarianAdd from "../Veterinarian/VeterinarianAdd/veterinarianAdd";
 import VeterinarianEdit from "../Veterinarian/VeterinarianEdit/veterinarianEdit";
 import Veterinarians from "../Veterinarian/VeterinarianList/veterinarians";
 
@@ -29,7 +30,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            veterinary: [],
+            veterinaries: [],
             veterinarians: [],
             appointments: [],
             owners: [],
@@ -52,12 +53,26 @@ class App extends Component {
                         <Routes>
                             {/*veterinary region start*/}
                             <Route path={"/veterinary"}
-                                   element={<Veterinaries veterinary={this.state.veterinary}
+                                   element={<Veterinaries veterinaries={this.state.veterinaries}
                                                           onDelete={this.deleteVeterinary}
-                                                          onEdit={this.getVeterinary}/>}/>
+                                                          onEdit={this.getVeterinary}
+                                                          onAddVeterinarian={this.getVeterinary}
+                                                          onVeterinaryView={this.getVeterinary}/>}/>
+
+                            <Route path={"/veterinary/:id"}
+                                   element={<VeterinaryView veterinary={this.state.selectedVeterinary}
+                                                            onDelete={this.deleteVeterinary}
+                                                            onEdit={this.getVeterinary}
+                                                            onAddVeterinarian={this.getVeterinary}
+                                                            onDeleteVeterinarian={this.deleteVeterinarian}
+                                                            onEditVeterinarian={this.getVeterinary}/>}/>
 
                             <Route path={"/veterinary/add"}
                                    element={<VeterinaryAdd onAddVeterinary={this.addVeterinary}/>}/>
+
+                            <Route path={"/veterinary/addVeterinarian/:id"}
+                                   element={<VeterinarianAdd veterinary={this.state.selectedVeterinary}
+                                                            onAddVeterinarian={this.addVeterinarian}/>}/>
 
                             <Route path={"/veterinary/edit/:id"}
                                    element={<VeterinaryEdit veterinary={this.state.selectedVeterinary}
@@ -166,7 +181,7 @@ class App extends Component {
         VeterinaryService.fetchVeterinaries()
             .then((data) => {
                 this.setState({
-                    veterinary: data.data
+                    veterinaries: data.data
                 })
             })
     }
@@ -182,6 +197,8 @@ class App extends Component {
                 this.setState(({
                     selectedVeterinary: data.data
                 }))
+                console.log(data.data)
+                console.log(this.state.selectedVeterinary)
             })
     }
     addVeterinary = (name, streetName, houseNumber, city, postalCode) => {
@@ -221,8 +238,8 @@ class App extends Component {
                 }))
             })
     }
-    addVeterinarian = (name, surname, email, phone, address, dateOfEmployment) => {
-        VeterinaryService.addVeterinarian(name, surname, email, phone, address, dateOfEmployment)
+    addVeterinarian = (id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment) => {
+        VeterinaryService.addVeterinarian(id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment)
             .then(() => {
                 this.loadVeterinarians();
             })

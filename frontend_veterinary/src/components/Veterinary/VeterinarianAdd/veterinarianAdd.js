@@ -1,15 +1,19 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
-const VeterinaryAdd = (props) => {
+const VeterinarianAdd = (props) => {
 
     const navigate = useNavigate(); //da moze da redirektirame na nova pateka
     const [formData, updateFormData] = React.useState({
         name : "",
+        surname : "",
+        email : "",
+        phone : "",
         streetName : "",
         houseNumber : "",
         city : "",
-        postalCode : ""
+        postalCode : "",
+        dateOfEmployment: ""
     });
 
     //e event koj se kreira on change
@@ -24,34 +28,75 @@ const VeterinaryAdd = (props) => {
         e.preventDefault(); //ne gi prakjaj vednas podatocite kako post request tuku napravi go slednoto podolu
 
         const name = formData.name;
+        const surname = formData.surname;
+        const email = formData.email;
+        const phone = formData.phone;
         const streetName = formData.streetName;
         const houseNumber = formData.houseNumber;
         const city = formData.city;
         const postalCode = formData.postalCode;
-
-        props.onAddVeterinary(name, streetName, houseNumber, city, postalCode);
+        const dateOfEmployment = formData.dateOfEmployment;
+        //fali veterinary id
+        props.onAddVeterinarian(props.veterinary.id.id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment);
         navigate('/veterinary'); //vrati me na veterinary
     }
 
     return (
-        <div className="container mm-4 mt-5">
+        <div className="container">
             <div className="row">
                 <div className="col-md-5">
                     <div className="secure text-center margin-bottom-md">
-                        <h1 className="margin-bottom-md text-primary m-4">
-                            Veterinary Form
+                        <h1 className="mt-5 link-class">
+                            {props.veterinary.name}
                         </h1>
+                        <h4 className="margin-bottom-md text-primary mb-4">
+                            Add veterinarian
+                        </h4>
                     </div>
+
                     <form onSubmit={onFormSubmit} className={"form m-4"}>
 
                         <div className="form-group m-2">
-                            <label htmlFor="name">Vet Clinic name</label>
+                            <label htmlFor="name">Name</label>
                             <input type="text"
                                    className="form-control"
                                    id="name"
                                    name="name"
                                    required
-                                   placeholder="Enter veterinary name"
+                                   placeholder="Enter name"
+                                   onChange={handleChange}/>
+                        </div>
+
+                        <div className="form-group m-2">
+                            <label htmlFor="name">Surname</label>
+                            <input type="text"
+                                   className="form-control"
+                                   id="surname"
+                                   name="surname"
+                                   required
+                                   placeholder="Enter surname"
+                                   onChange={handleChange}/>
+                        </div>
+
+                        <div className="form-group m-2">
+                            <label htmlFor="name">Phone</label>
+                            <input type="text"
+                                   className="form-control"
+                                   id="phone"
+                                   name="phone"
+                                   required
+                                   placeholder="Enter phone"
+                                   onChange={handleChange}/>
+                        </div>
+
+                        <div className="form-group m-2">
+                            <label htmlFor="name">Email</label>
+                            <input type="text"
+                                   className="form-control"
+                                   id="email"
+                                   name="email"
+                                   required
+                                   placeholder="Enter email"
                                    onChange={handleChange}/>
                         </div>
 
@@ -95,11 +140,22 @@ const VeterinaryAdd = (props) => {
                                    id="postalCode"
                                    name="postalCode"
                                    required
-                                   placeholder="Enter postal code"
+                                   placeholder="Enter city"
                                    onChange={handleChange}/>
                         </div>
 
-                        <button id="submit" type="submit" className="btn btn-primary m-2">Submit</button>
+                        <div className="form-group m-2">
+                            <label htmlFor="name">Date of employment</label>
+                            <input type="date"
+                                   className="form-control"
+                                   id="dateOfEmployment"
+                                   name="dateOfEmployment"
+                                   required
+                                   placeholder="Enter date of employment"
+                                   onChange={handleChange}/>
+                        </div>
+
+                        <button id="submit" type="submit" className="btn btn-primary m-2">Add employee</button>
 
                     </form>
                 </div>
@@ -109,4 +165,4 @@ const VeterinaryAdd = (props) => {
 
 }
 
-export default VeterinaryAdd;
+export default VeterinarianAdd;

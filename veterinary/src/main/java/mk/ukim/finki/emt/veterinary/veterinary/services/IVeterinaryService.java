@@ -7,6 +7,8 @@ import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinarianId;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinaryId;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinarianForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinaryForm;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
@@ -19,5 +21,4 @@ public interface IVeterinaryService {
     VeterinaryId saveVeterinary(VeterinaryForm veterinaryForm);
     void deleteVeterinary(VeterinaryId VeterinaryId) throws VeterinaryNotExistsException;
     VeterinaryId editVeterinary(VeterinaryId veterinaryId, VeterinaryForm veterinaryForm) throws  VeterinaryNotExistsException;
-
 }

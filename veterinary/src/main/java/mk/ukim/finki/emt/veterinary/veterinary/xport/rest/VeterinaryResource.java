@@ -3,6 +3,7 @@ package mk.ukim.finki.emt.veterinary.veterinary.xport.rest;
 import lombok.AllArgsConstructor;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinary;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinaryId;
+import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinarianForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinaryForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.impl.VeterinaryService;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/veterinary")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @AllArgsConstructor
 public class VeterinaryResource {
 
@@ -44,5 +45,12 @@ public class VeterinaryResource {
                                @RequestBody VeterinaryForm veterinaryForm){
         VeterinaryId veterinaryId = new VeterinaryId(id);
         veterinaryService.editVeterinary(veterinaryId, veterinaryForm);
+    }
+
+    @PostMapping("/{id}/veterinarian/add")
+    public void addVeterinarian(@PathVariable String id,
+                               @RequestBody VeterinarianForm veterinarianForm){
+        VeterinaryId veterinaryId = new VeterinaryId(id);
+        veterinaryService.addVeterinarian(veterinaryId, veterinarianForm);
     }
 }

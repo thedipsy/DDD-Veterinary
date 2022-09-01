@@ -1,6 +1,7 @@
 package mk.ukim.finki.emt.veterinary.veterinary.services.impl;
 
 import lombok.AllArgsConstructor;
+import mk.ukim.finki.emt.veterinary.veterinary.Config.Constants;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.exceptions.VeterinarianNotExistsException;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.exceptions.VeterinaryNotExistsException;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinary;
@@ -10,6 +11,9 @@ import mk.ukim.finki.emt.veterinary.veterinary.domain.repository.VeterinaryRepos
 import mk.ukim.finki.emt.veterinary.veterinary.services.IVeterinaryService;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinarianForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinaryForm;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +21,8 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+
 
 @Service
 @Transactional
@@ -25,6 +31,8 @@ public class VeterinaryService implements IVeterinaryService {
 
     private final VeterinaryRepository veterinaryRepository;
     private final Validator validator;
+    private final EmailService emailService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<Veterinary> findAll() {
@@ -69,19 +77,7 @@ public class VeterinaryService implements IVeterinaryService {
     }
 
     private Veterinary toDomainObject(VeterinaryForm veterinaryForm){
-        var veterinary = Veterinary.build(veterinaryForm.getName(), veterinaryForm.getAddress());
-
-        veterinaryForm.getVeterinarians()
-                .forEach(veterinarian -> veterinary.addVeterinarian(
-                        veterinarian.getName(),
-                        veterinarian.getSurname(),
-                        veterinarian.getEmail(),
-                        veterinarian.getPhone(),
-                        veterinarian.getAddress(),
-                        veterinarian.getDateOfEmployment()
-                ));
-
-        return veterinary;
+        return Veterinary.build(veterinaryForm.getName(), veterinaryForm.getAddress());
     }
 
     @Override
@@ -96,16 +92,36 @@ public class VeterinaryService implements IVeterinaryService {
     @Override
     public void addVeterinarian(VeterinaryId veterinaryId, VeterinarianForm veterinarianForm) throws VeterinaryNotExistsException {
         Veterinary veterinary = findById(veterinaryId);
+        //generate password
+        String generatedPassword = generatePassword();
+        String encodedPassword = passwordEncoder.encode(generatedPassword);
+
         veterinary.addVeterinarian(
                 veterinarianForm.getName(),
                 veterinarianForm.getSurname(),
                 veterinarianForm.getEmail(),
+                encodedPassword,
                 veterinarianForm.getPhone(),
                 veterinarianForm.getAddress(),
                 veterinarianForm.getDateOfEmployment()
         );
 
         veterinaryRepository.saveAndFlush(veterinary);
+        emailService.sendEmail(veterinarianForm.getEmail(), "Welcome To Our Web App", "Your auto-generated password is: " + generatedPassword);
+    }
+
+    /**
+     * Returns a 10 characters random generated password containing 0-9, a-z, A-Z
+     */
+    public static String generatePassword() {
+        String alphaNumeric = Constants.ALPHA_NUMERIC;
+        Random random = new Random();
+
+        StringBuilder sb = new StringBuilder(10);
+        for (int i = 0; i < 10; i++) {
+            sb.append(alphaNumeric.charAt(random.nextInt(alphaNumeric.length())));
+        }
+        return sb.toString();
     }
 
     @Override
@@ -115,5 +131,6 @@ public class VeterinaryService implements IVeterinaryService {
 
         veterinaryRepository.saveAndFlush(veterinary);
     }
+
 
 }

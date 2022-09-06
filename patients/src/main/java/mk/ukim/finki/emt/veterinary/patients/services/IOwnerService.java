@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface IOwnerService {
 
     List<Owner> findAll();
-    Optional<Owner> findById(OwnerId ownerId);
+    Owner findById(OwnerId ownerId);
     void addAnimal(OwnerId ownerId, AnimalForm animalForm) throws OwnerNotExistsException;
     void deleteAnimal(OwnerId ownerId, AnimalId animalId) throws OwnerNotExistsException, AnimalNotExistsException;
     OwnerId saveOwner(OwnerForm ownerForm);

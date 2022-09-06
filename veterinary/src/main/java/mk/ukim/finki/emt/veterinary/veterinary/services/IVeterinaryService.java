@@ -8,11 +8,12 @@ import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinaryId;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinarianForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinaryForm;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
-public interface IVeterinaryService {
+public interface IVeterinaryService extends UserDetailsService {
 
     List<Veterinary> findAll();
     Veterinary findById(VeterinaryId veterinaryId);

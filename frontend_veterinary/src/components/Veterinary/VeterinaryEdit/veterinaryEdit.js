@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import VeterinaryService from "../../../repository/repositoryVeterinary";
+
 
 const VeterinaryEdit = (props) => {
-
     const navigate = useNavigate(); //da moze da redirektirame na nova pateka
     const [formData, updateFormData] = React.useState({
         name : "",
@@ -33,71 +34,73 @@ const VeterinaryEdit = (props) => {
         navigate('/veterinary'); //vrati me na veterinary
     }
 
+    let address
+    if(props.veterinary !== undefined && props.veterinary.address !== undefined){
+        address = props.veterinary.address
+    } else {
+        address = {}
+    }
+
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-5">
-                    <form onSubmit={onFormSubmit}>
+        <div className="container w-50">
 
-                        <div className="form-group">
-                            <label htmlFor="name">Vet Clinic name</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="name"
-                                   name="name"
-                                   placeholder={props.veterinary.name}
-                                   onChange={handleChange}/>
-                        </div>
-
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Street Name</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="streetName"
-                                   name="streetName"
-                                   placeholder={props.veterinary.address.streetName}
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">House Number</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="houseNumber"
-                                   name="houseNumber"
-                                   placeholder={props.veterinary.address.houseNumber}
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">City</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="city"
-                                   name="city"
-                                   placeholder={props.veterinary.address.city}
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Postal Code</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="postalCode"
-                                   name="postalCode"
-                                   placeholder={props.veterinary.address.postalCode}
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <button id="submit" type="submit" className="btn btn-primary">Submit</button>
-
-                    </form>
-                </div>
+            <div className={"row mb-3 mt-5"}>
+                <h1 className="mt-2 mb-2 link-class text-center">
+                    {props.veterinary.name}
+                </h1>
+                <h5 className="margin-bottom-md text-primary mt-2 text-center">
+                    Edit general info
+                </h5>
             </div>
-        </div>
 
+            <form onSubmit={onFormSubmit}>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <input className="form-control" placeholder={props.veterinary.name}
+                               name="name"
+                               onChange={handleChange}/>
+                    </div>
+                </div>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <input className="form-control" placeholder={address.streetName}
+                               name="streetName"
+                               onChange={handleChange}/>
+                    </div>
+
+                    <div className="col">
+                        <input className="form-control" placeholder={address.houseNumber}
+                               name="houseNumber"
+                               onChange={handleChange}/>
+                    </div>
+                </div>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <input className="form-control" placeholder={address.city}
+                               name="city"
+                               onChange={handleChange}/>
+                    </div>
+
+                    <div className="col">
+                        <input className="form-control" placeholder={address.postalCode}
+                               name="postalCode"
+                               onChange={handleChange}/>
+                    </div>
+                </div>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <button type="submit" className="btn btn-primary btn-lg btn-block w-100">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     )
+
 
 }
 

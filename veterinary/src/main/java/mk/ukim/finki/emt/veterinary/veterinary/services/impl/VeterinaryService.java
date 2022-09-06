@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import mk.ukim.finki.emt.veterinary.veterinary.Config.Constants;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.exceptions.VeterinarianNotExistsException;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.exceptions.VeterinaryNotExistsException;
+import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinarian;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinary;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinarianId;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinaryId;
@@ -133,4 +134,16 @@ public class VeterinaryService implements IVeterinaryService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        List<Veterinary> veterinaryList = findAll();
+        for(Veterinary veterinary : veterinaryList){
+            for(Veterinarian veterinarian : veterinary.getVeterinarians()){
+                if(veterinarian.getUsername().equals(username)){
+                    return veterinarian;
+                }
+            }
+        }
+        throw new UsernameNotFoundException(username);
+    }
 }

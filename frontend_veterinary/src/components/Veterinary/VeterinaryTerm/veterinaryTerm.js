@@ -5,11 +5,6 @@ const veterinaryTerm = (props) => {
 
     return(
             <tr className="inner-box">
-                <th scope="row">
-                    <div className="event-date">
-                        <span>1</span>
-                    </div>
-                </th>
                 <td>
                     <div className="event-wrap">
                         <h3><b><Link title={"Veterinary"} className={"link-class"} to={`/veterinary/${props.term.id.id}`}
@@ -23,11 +18,12 @@ const veterinaryTerm = (props) => {
                 </td>
                 <td className={"text-right"}>
                     <Link title={"Veterinary"} className={"btn btn-outline-primary m-2"} to={`/veterinary/${props.term.id.id}`}
-                          onClick={() => props.onAddVeterinarian(props.term.id.id)}>View
+                          onClick={() => props.onVeterinaryView(props.term.id.id)}>View
                     </Link>
                     <Link title={"Add Veterinarian"} className={"btn btn-outline-primary m-2"} to={`/veterinary/addVeterinarian/${props.term.id.id}`}
                           onClick={() => props.onAddVeterinarian(props.term.id.id)}>Add Veterinarian
                     </Link>
+
                     <Link title={"Edit"} className={"btn btn-outline-primary m-2"} to={`/veterinary/edit/${props.term.id.id}`}
                           onClick={() => props.onEdit(props.term.id.id)}>Edit
                     </Link>

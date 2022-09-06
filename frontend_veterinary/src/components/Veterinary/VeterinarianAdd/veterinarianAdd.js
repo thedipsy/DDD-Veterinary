@@ -37,130 +37,108 @@ const VeterinarianAdd = (props) => {
         const postalCode = formData.postalCode;
         const dateOfEmployment = formData.dateOfEmployment;
         //fali veterinary id
+
         props.onAddVeterinarian(props.veterinary.id.id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment);
         navigate('/veterinary'); //vrati me na veterinary
     }
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-5">
-                    <div className="secure text-center margin-bottom-md">
-                        <h1 className="mt-5 link-class">
-                            {props.veterinary.name}
-                        </h1>
-                        <h4 className="margin-bottom-md text-primary mb-4">
-                            Add veterinarian
-                        </h4>
+
+        <div className="container w-50">
+
+            <div className={"row mb-3 mt-5"}>
+                <h1 className="mt-2 mb-2 link-class text-center">
+                    {props.veterinary.name}
+                </h1>
+            </div>
+
+            <form onSubmit={onFormSubmit}>
+
+                <div className="row mb-3 mt-5">
+                    <div className="col">
+                        <input className="form-control" placeholder="First Name"
+                               name="name"
+                               required
+                               onChange={handleChange}/>
                     </div>
 
-                    <form onSubmit={onFormSubmit} className={"form m-4"}>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Name</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="name"
-                                   name="name"
-                                   required
-                                   placeholder="Enter name"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Surname</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="surname"
-                                   name="surname"
-                                   required
-                                   placeholder="Enter surname"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Phone</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="phone"
-                                   name="phone"
-                                   required
-                                   placeholder="Enter phone"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Email</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="email"
-                                   name="email"
-                                   required
-                                   placeholder="Enter email"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Street Name</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="streetName"
-                                   name="streetName"
-                                   required
-                                   placeholder="Enter street name"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">House Number</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="houseNumber"
-                                   name="houseNumber"
-                                   required
-                                   placeholder="Enter house number"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">City</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="city"
-                                   name="city"
-                                   required
-                                   placeholder="Enter city"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Postal Code</label>
-                            <input type="text"
-                                   className="form-control"
-                                   id="postalCode"
-                                   name="postalCode"
-                                   required
-                                   placeholder="Enter city"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <div className="form-group m-2">
-                            <label htmlFor="name">Date of employment</label>
-                            <input type="date"
-                                   className="form-control"
-                                   id="dateOfEmployment"
-                                   name="dateOfEmployment"
-                                   required
-                                   placeholder="Enter date of employment"
-                                   onChange={handleChange}/>
-                        </div>
-
-                        <button id="submit" type="submit" className="btn btn-primary m-2">Add employee</button>
-
-                    </form>
+                    <div className="col">
+                        <input className="form-control" placeholder="Last Name"
+                               name="surname"
+                               required
+                               onChange={handleChange}/>
+                    </div>
                 </div>
-            </div>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <input className="form-control" placeholder="Email Address"
+                               name="email"
+                               required
+                               onChange={handleChange}/>
+                    </div>
+                </div>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <input className="form-control" placeholder="Phone"
+                               name="phone"
+                               required
+                               onChange={handleChange}/>
+                    </div>
+                </div>
+
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <input className="form-control" placeholder="Street Name"
+                               name="streetName"
+                               required
+                               onChange={handleChange}/>
+                    </div>
+
+                    <div className="col">
+                        <input className="form-control" placeholder="Building Number"
+                               name="houseNumber"
+                               required
+                               onChange={handleChange}/>
+                    </div>
+                </div>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <input className="form-control" placeholder="City"
+                               name="city"
+                               required
+                               onChange={handleChange}/>
+                    </div>
+
+                    <div className="col">
+                        <input className="form-control" placeholder="Postal Code"
+                               name="postalCode"
+                               required
+                               onChange={handleChange}/>
+                    </div>
+                </div>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <input className="form-control" type={"date"}
+                               name="dateOfEmployment"
+                               required
+                               onChange={handleChange}/>
+                    </div>
+                </div>
+
+                <div className="row mb-3">
+                    <div className="col">
+                        <button type="submit" className="btn btn-primary btn-lg btn-block w-100">Add Employee</button>
+                    </div>
+                </div>
+
+            </form>
         </div>
+
     )
 
 }

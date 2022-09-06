@@ -43,8 +43,8 @@ const VeterinaryService = {
 
 
     //veterinarian region
-    fetchVeterinarians: () => {
-        return axios.get("veterinary/veterinarian")
+    fetchVeterinarians: (id) => {
+        return axios.get(`veterinary/${id}/veterinarians`)
     },
 
     getVeterinarian: (id) => {

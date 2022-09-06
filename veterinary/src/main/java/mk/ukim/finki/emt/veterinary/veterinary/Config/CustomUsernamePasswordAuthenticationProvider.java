@@ -28,7 +28,7 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
             throw new BadCredentialsException("Invalid Credentials");
         }
 
-        UserDetails userDetails = null;// veterinaryService.loadUserByUsername(username);
+        UserDetails userDetails = veterinaryService.loadUserByUsername(username);
 
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Password is incorrect!");

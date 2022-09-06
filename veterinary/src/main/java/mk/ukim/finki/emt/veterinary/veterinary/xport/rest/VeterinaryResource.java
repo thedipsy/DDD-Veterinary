@@ -1,13 +1,19 @@
 package mk.ukim.finki.emt.veterinary.veterinary.xport.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
+import mk.ukim.finki.emt.veterinary.veterinary.Config.filters.JwtAuthenticationFilter;
+import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinarian;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinary;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinaryId;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinarianForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinaryForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.impl.VeterinaryService;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -16,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class VeterinaryResource {
 
+    private final JwtAuthenticationFilter filter;
     private final VeterinaryService veterinaryService;
 
     @GetMapping
@@ -40,6 +47,13 @@ public class VeterinaryResource {
         return veterinaryService.findById(veterinaryId);
     }
 
+    @GetMapping("/{id}/veterinarians")
+    public List<Veterinarian> getVeterinarians(@PathVariable String id){
+        VeterinaryId veterinaryId = new VeterinaryId(id);
+        Veterinary veterinary =  veterinaryService.findById(veterinaryId);
+        return veterinary.getVeterinarians();
+    }
+
     @PutMapping("/edit/{id}")
     public void editVeterinary(@PathVariable String id,
                                @RequestBody VeterinaryForm veterinaryForm){
@@ -53,4 +67,14 @@ public class VeterinaryResource {
         VeterinaryId veterinaryId = new VeterinaryId(id);
         veterinaryService.addVeterinarian(veterinaryId, veterinarianForm);
     }
+
+
+    @PostMapping("/login")
+    public String doLogin(HttpServletRequest request,
+                          HttpServletResponse response) throws JsonProcessingException {
+        Authentication auth = this.filter.attemptAuthentication(request, response);
+        return this.filter.generateJwt(response, auth);
+
+    }
+
 }

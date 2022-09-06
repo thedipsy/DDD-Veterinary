@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 
 import Header from '../Header/header';
+import Login from '../Login/login';
 
 import PatientService from "../../repository/repositoryPatinet";
 import AppointmentService from "../../repository/repositoryAppointment";
@@ -14,9 +15,6 @@ import Veterinaries from "../Veterinary/VeterinaryList/veterinaries";
 import VeterinarianAdd from "../Veterinary/VeterinarianAdd/veterinarianAdd";
 import VeterinaryView from "../Veterinary/VeterinaryView/veterinaryView";
 
-import VeterinarianEdit from "../Veterinarian/VeterinarianEdit/veterinarianEdit";
-import Veterinarians from "../Veterinarian/VeterinarianList/veterinarians";
-
 import OwnerAdd from "../Owner/OwnerAdd/ownerAdd";
 import OwnerEdit from "../Owner/OwnerEdit/ownerEdit";
 import Owners from "../Owner/OwnerList/owners";
@@ -24,13 +22,14 @@ import Owners from "../Owner/OwnerList/owners";
 import PatientAdd from "../Patient/PatientAdd/patientAdd";
 import PatientEdit from "../Patient/PatientEdit/patientEdit";
 import Patients from "../Patient/PatientList/patients";
+import AppointmentAdd from "../Appointment/AppointmentAdd/appointmentAdd";
 
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            veterinaries: [],
+            user : {},
             veterinarians: [],
             appointments: [],
             owners: [],
@@ -45,16 +44,19 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Header/>
+                <Header onLogout={this.onLogout}/>
 
                 <main>
                     <div className="container">
 
                         <Routes>
+                            {/*login form*/}
+                            <Route path={"/login"}
+                                   element={<Login onLogin={this.login}/>}/>
+
                             {/*veterinary region start*/}
                             <Route path={"/veterinary"}
-                                   element={<Veterinaries veterinaries={this.state.veterinaries}
-                                                          onDelete={this.deleteVeterinary}
+                                   element={<Veterinaries onDelete={this.deleteVeterinary}
                                                           onEdit={this.getVeterinary}
                                                           onAddVeterinarian={this.getVeterinary}
                                                           onVeterinaryView={this.getVeterinary}/>}/>
@@ -77,21 +79,22 @@ class App extends Component {
                             <Route path={"/veterinary/edit/:id"}
                                    element={<VeterinaryEdit veterinary={this.state.selectedVeterinary}
                                                             onEditVeterinary={this.editVeterinary}/>}/>
+
                             {/*veterinary region end*/}
 
 
                             {/*veterinarian region start*/}
-                            <Route path={"/veterinarians"}
-                                   element={<Veterinarians veterinary={this.state.veterinarians}
-                                                           onDelete={this.deleteVeterinarian}
-                                                           onEdit={this.editVeterinarian}/>}/>
+                            {/*<Route path={"/veterinarians"}*/}
+                            {/*       element={<Veterinarians veterinary={this.state.veterinarians}*/}
+                            {/*                               onDelete={this.deleteVeterinarian}*/}
+                            {/*                               onEdit={this.editVeterinarian}/>}/>*/}
 
                             <Route path={"/veterinarian/add"}
                                    element={<VeterinarianAdd onAddVeterinarian={this.addVeterinarian}/>}/>
 
-                            <Route path={"/veterinarian/edit/:id"}
-                                   element={<VeterinarianEdit veterinarian={this.state.selectedVeterinarian}
-                                                              onEditVeterinarian={this.editVeterinarian}/>}/>
+                            {/*<Route path={"/veterinarian/edit/:id"}*/}
+                            {/*       element={<VeterinarianEdit veterinarian={this.state.selectedVeterinarian}*/}
+                            {/*                                  onEditVeterinarian={this.editVeterinarian}/>}/>*/}
                             {/*veterinarian region end*/}
 
 
@@ -124,6 +127,20 @@ class App extends Component {
                                                          onEditPatient={this.editPatient}/>}/>
                             {/*patient region end*/}
 
+                            {/*appointment region start*/}
+                            {/*<Route path={"/appointment"}*/}
+                            {/*       element={<Appoint patients={this.state.patients}*/}
+                            {/*                          onDelete={this.deletePatient}*/}
+                            {/*                          onEdit={this.editPatient}/>}/>*/}
+
+                            <Route path={"/appointment/book"}
+                                   element={<AppointmentAdd onBookAppointment={this.bookAppointment}/>}/>
+
+                            {/*<Route path={"/patients/edit/:id"}*/}
+                            {/*       element={<PatientEdit patient={this.state.selectedPatient}*/}
+                            {/*                             onEditPatient={this.editPatient}/>}/>*/}
+                            {/*appointment region end*/}
+
 
                             <Route path="/" element={<Navigate replace to="/home"/>}/>
 
@@ -136,8 +153,9 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.loadVeterinaries();
+
     }
+
 
     // appointment region start
     loadAppointments = () => {
@@ -185,28 +203,30 @@ class App extends Component {
                 })
             })
     }
+
     deleteVeterinary = (id) => {
         VeterinaryService.deleteVeterinary(id)
             .then(() => {
                 this.loadVeterinaries();
             })
     }
+
     getVeterinary = (id) => {
         VeterinaryService.getVeterinary(id)
             .then((data) => {
                 this.setState(({
                     selectedVeterinary: data.data
                 }))
-                console.log(data.data)
-                console.log(this.state.selectedVeterinary)
             })
     }
+
     addVeterinary = (name, streetName, houseNumber, city, postalCode) => {
         VeterinaryService.addVeterinary(name, streetName, houseNumber, city, postalCode)
             .then(() => {
                 this.loadVeterinaries();
             })
     }
+
     editVeterinary = (id, name, streetName, houseNumber, city, postalCode) => {
         VeterinaryService.editVeterinary(id, name, streetName, houseNumber, city, postalCode)
             .then(() => {
@@ -254,11 +274,16 @@ class App extends Component {
 
     // patient region start
     loadPatients = () => {
-        PatientService.fetchPatients()
+        PatientService.fetchOwners()
             .then((data) => {
-                this.setState({
-                    patients: data.data
-                })
+
+                if (data.data.length) {
+                    data.data.forEach(v => {
+                        this.setState(prevState => ({
+                            patients: [...prevState.patients, {"name": v.animals}]
+                        }))
+                    })
+                }
             })
     }
     deletePatient = (id) => {
@@ -268,7 +293,7 @@ class App extends Component {
             })
     }
     getPatient = (id) => {
-        PatientService.getPatient(id)
+        PatientService.getOwner(id)
             .then((data) => {
                 this.setState(({
                     selectedPatient: data.data
@@ -312,8 +337,8 @@ class App extends Component {
                 }))
             })
     }
-    addOwner = (name, surname, phone, email, address) => {
-        PatientService.addOwner(name, surname, phone, email, address)
+    addOwner = (name, surname, phone, email, streetName, houseNumber, city, postalCode) => {
+        PatientService.addOwner(name, surname, phone, email, streetName, houseNumber, city, postalCode)
             .then(() => {
                 this.loadOwners();
             })

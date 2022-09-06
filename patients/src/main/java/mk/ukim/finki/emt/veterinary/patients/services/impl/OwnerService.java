@@ -33,8 +33,9 @@ public class OwnerService implements IOwnerService {
     }
 
     @Override
-    public Optional<Owner> findById(OwnerId ownerId) {
-        return ownerRepository.findById(ownerId);
+    public Owner findById(OwnerId ownerId) {
+        return ownerRepository.findById(ownerId)
+                .orElseThrow(OwnerNotExistsException::new);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class OwnerService implements IOwnerService {
 
     @Override
     public void deleteOwner(OwnerId ownerId) throws OwnerNotExistsException {
-        if(findById(ownerId).isPresent()) {
+        if(findById(ownerId) != null) {
             ownerRepository.deleteById(ownerId);
         } else{
             throw new OwnerNotExistsException();
@@ -84,7 +85,7 @@ public class OwnerService implements IOwnerService {
 
     @Override
     public void addAnimal(OwnerId ownerId, AnimalForm animalForm) throws OwnerNotExistsException {
-        Owner owner = findById(ownerId).orElseThrow(OwnerNotExistsException::new);
+        Owner owner = findById(ownerId);
         owner.addAnimal(
                 animalForm.getName(),
                 animalForm.getBirthDate(),
@@ -100,7 +101,7 @@ public class OwnerService implements IOwnerService {
 
     @Override
     public void deleteAnimal(OwnerId ownerId, AnimalId animalId) throws OwnerNotExistsException, AnimalNotExistsException {
-        Owner owner = findById(ownerId).orElseThrow(OwnerNotExistsException::new);
+        Owner owner = findById(ownerId);
         owner.removeAnimal(animalId);
 
         ownerRepository.saveAndFlush(owner);

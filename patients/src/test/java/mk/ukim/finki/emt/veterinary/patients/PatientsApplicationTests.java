@@ -31,7 +31,7 @@ class PatientsApplicationTests {
         ownerForm.setEmail("milosheskaa@gmail.com");
 
         OwnerId ownerId = orderService.saveOwner(ownerForm);
-        Owner owner = orderService.findById(ownerId).orElseThrow(OwnerNotExistsException::new);
+        Owner owner = orderService.findById(ownerId);
         System.out.println("succeeded");
     }
 

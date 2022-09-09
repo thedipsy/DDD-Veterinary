@@ -3,15 +3,12 @@ package mk.ukim.finki.emt.veterinary.veterinary.domain.models;
 import lombok.Data;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.valueobjects.Address;
-import mk.ukim.finki.emt.veterinary.veterinary.Config.Constants;
+import mk.ukim.finki.emt.veterinary.veterinary.domain.exceptions.VeterinarianNotExistsException;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinarianId;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinaryId;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Data
 @Entity
@@ -42,8 +39,24 @@ public class Veterinary extends AbstractEntity<VeterinaryId> {
         veterinarians.add(veterinarian);
     }
 
-
     public void removeVeterinarian(VeterinarianId veterinarianId) {
         veterinarians.removeIf(v -> v.getId().equals(veterinarianId));
+    }
+
+    public Optional<Veterinarian> getVeterinarian(VeterinarianId veterinarianId) {
+        return veterinarians.stream().filter(v -> v.getId().equals(veterinarianId)).findFirst();
+    }
+
+    public void editVeterinarian(VeterinarianId veterinarianId, String name, String surname, String email, String phone, Address address, Date dateOfEmployment) {
+        Veterinarian veterinarian = getVeterinarian(veterinarianId).orElseThrow(VeterinarianNotExistsException::new);
+        veterinarian.setName(name);
+        veterinarian.setSurname(surname);
+        veterinarian.setUsername(email);
+        veterinarian.setPhone(phone);
+        veterinarian.setAddress(address);
+        veterinarian.setDateOfEmployment(dateOfEmployment);
+
+        removeVeterinarian(veterinarianId); //delete the old one
+        veterinarians.add(veterinarian); //add the edited one
     }
 }

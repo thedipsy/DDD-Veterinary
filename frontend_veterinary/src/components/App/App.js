@@ -7,14 +7,13 @@ import Login from '../Login/login';
 
 import PatientService from "../../repository/repositoryPatinet";
 import AppointmentService from "../../repository/repositoryAppointment";
-import VeterinaryService from "../../repository/repositoryVeterinary";
 
-import VeterinaryAdd from "../Veterinary/VeterinaryAdd/veterinaryAdd";
-import VeterinaryEdit from "../Veterinary/VeterinaryEdit/veterinaryEdit";
-import Veterinaries from "../Veterinary/VeterinaryList/veterinaries";
-import VeterinarianAdd from "../Veterinary/VeterinarianAdd/veterinarianAdd";
-import VeterinaryView from "../Veterinary/VeterinaryView/veterinaryView";
+import VeterinaryAdd from "../Veterinary/Veterinary/VeterinaryAdd/veterinaryAdd";
 
+import Veterinaries from "../Veterinary/Veterinary/VeterinaryList/veterinaries";
+import VeterinarianAdd from "../Veterinary/Veterinarian/VeterinarianAdd/veterinarianAdd";
+import VeterinaryView from "../Veterinary/Veterinary/VeterinaryView/veterinaryView";
+import VeterinaryEdit from "../Veterinary/Veterinary/VeterinaryEdit/veterinaryEdit";
 import OwnerAdd from "../Owner/OwnerAdd/ownerAdd";
 import OwnerEdit from "../Owner/OwnerEdit/ownerEdit";
 import Owners from "../Owner/OwnerList/owners";
@@ -23,6 +22,7 @@ import PatientAdd from "../Patient/PatientAdd/patientAdd";
 import PatientEdit from "../Patient/PatientEdit/patientEdit";
 import Patients from "../Patient/PatientList/patients";
 import AppointmentAdd from "../Appointment/AppointmentAdd/appointmentAdd";
+import VeterinarianEdit from "../Veterinary/Veterinarian/VeterinarianEdit/VeterinarianEdit";
 
 class App extends Component {
 
@@ -50,35 +50,31 @@ class App extends Component {
                     <div className="container">
 
                         <Routes>
-                            {/*login form*/}
+                            {/*login form start*/}
                             <Route path={"/login"}
                                    element={<Login onLogin={this.login}/>}/>
+                            {/*login form end*/}
 
                             {/*veterinary region start*/}
                             <Route path={"/veterinary"}
-                                   element={<Veterinaries onDelete={this.deleteVeterinary}
-                                                          onEdit={this.getVeterinary}
-                                                          onAddVeterinarian={this.getVeterinary}
-                                                          onVeterinaryView={this.getVeterinary}/>}/>
-
-                            <Route path={"/veterinary/:id"}
-                                   element={<VeterinaryView veterinary={this.state.selectedVeterinary}
-                                                            onDelete={this.deleteVeterinary}
-                                                            onEdit={this.getVeterinary}
-                                                            onAddVeterinarian={this.getVeterinary}
-                                                            onDeleteVeterinarian={this.deleteVeterinarian}
-                                                            onEditVeterinarian={this.getVeterinary}/>}/>
+                                   element={<Veterinaries/>}/>
 
                             <Route path={"/veterinary/add"}
-                                   element={<VeterinaryAdd onAddVeterinary={this.addVeterinary}/>}/>
+                                   element={<VeterinaryAdd/>}/>
 
-                            <Route path={"/veterinary/addVeterinarian/:id"}
-                                   element={<VeterinarianAdd veterinary={this.state.selectedVeterinary}
-                                                            onAddVeterinarian={this.addVeterinarian}/>}/>
+                            <Route path={"/veterinary/:id"}
+                                   element={<VeterinaryView/>}/>
 
                             <Route path={"/veterinary/edit/:id"}
-                                   element={<VeterinaryEdit veterinary={this.state.selectedVeterinary}
-                                                            onEditVeterinary={this.editVeterinary}/>}/>
+                                   element={<VeterinaryEdit/>}/>
+
+                            <Route path={"/veterinary/:id/veterinarian"}
+                                   element={<VeterinarianAdd/>}/>
+
+                            <Route path={"/veterinary/:id/veterinarian/edit/:veterinarianId"}
+                                   element={<VeterinarianEdit/>}/>
+
+
 
                             {/*veterinary region end*/}
 
@@ -88,9 +84,6 @@ class App extends Component {
                             {/*       element={<Veterinarians veterinary={this.state.veterinarians}*/}
                             {/*                               onDelete={this.deleteVeterinarian}*/}
                             {/*                               onEdit={this.editVeterinarian}/>}/>*/}
-
-                            <Route path={"/veterinarian/add"}
-                                   element={<VeterinarianAdd onAddVeterinarian={this.addVeterinarian}/>}/>
 
                             {/*<Route path={"/veterinarian/edit/:id"}*/}
                             {/*       element={<VeterinarianEdit veterinarian={this.state.selectedVeterinarian}*/}
@@ -152,11 +145,6 @@ class App extends Component {
         );
     }
 
-    componentDidMount() {
-
-    }
-
-
     // appointment region start
     loadAppointments = () => {
         AppointmentService.fetchAppointments()
@@ -194,83 +182,6 @@ class App extends Component {
     }
     // appointment region end
 
-    // veterinary region start
-    loadVeterinaries = () => {
-        VeterinaryService.fetchVeterinaries()
-            .then((data) => {
-                this.setState({
-                    veterinaries: data.data
-                })
-            })
-    }
-
-    deleteVeterinary = (id) => {
-        VeterinaryService.deleteVeterinary(id)
-            .then(() => {
-                this.loadVeterinaries();
-            })
-    }
-
-    getVeterinary = (id) => {
-        VeterinaryService.getVeterinary(id)
-            .then((data) => {
-                this.setState(({
-                    selectedVeterinary: data.data
-                }))
-            })
-    }
-
-    addVeterinary = (name, streetName, houseNumber, city, postalCode) => {
-        VeterinaryService.addVeterinary(name, streetName, houseNumber, city, postalCode)
-            .then(() => {
-                this.loadVeterinaries();
-            })
-    }
-
-    editVeterinary = (id, name, streetName, houseNumber, city, postalCode) => {
-        VeterinaryService.editVeterinary(id, name, streetName, houseNumber, city, postalCode)
-            .then(() => {
-                this.loadVeterinaries();
-            })
-    }
-    // veterinary region end
-
-    // veterinarian region start
-    loadVeterinarians = () => {
-        VeterinaryService.fetchVeterinarians()
-            .then((data) => {
-                this.setState({
-                    veterinarians: data.data
-                })
-            })
-    }
-    deleteVeterinarian = (id) => {
-        VeterinaryService.deleteVeterinarian(id)
-            .then(() => {
-                this.loadVeterinarians();
-            })
-    }
-    getVeterinarian = (id) => {
-        VeterinaryService.getVeterinarian(id)
-            .then((data) => {
-                this.setState(({
-                    selectedVeterinarian: data.data
-                }))
-            })
-    }
-    addVeterinarian = (id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment) => {
-        VeterinaryService.addVeterinarian(id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment)
-            .then(() => {
-                this.loadVeterinarians();
-            })
-    }
-    editVeterinarian = (id, name, surname, email, phone, address, dateOfEmployment) => {
-        VeterinaryService.addVeterinarian(name, surname, email, phone, address, dateOfEmployment)
-            .then(() => {
-                this.loadVeterinarians();
-            })
-    }
-    // veterinarian region end
 
     // patient region start
     loadPatients = () => {

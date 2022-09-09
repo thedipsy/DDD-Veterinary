@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 const VeterinaryAdd = (props) => {
 
     const navigate = useNavigate(); //da moze da redirektirame na nova pateka
-    const [formData, updateFormData] = React.useState({
+
+    const [formData, updateFormData] = useState({
         name : "",
         streetName : "",
         houseNumber : "",
@@ -94,7 +95,6 @@ const VeterinaryAdd = (props) => {
             </form>
         </div>
     )
-
 }
 
 export default VeterinaryAdd;

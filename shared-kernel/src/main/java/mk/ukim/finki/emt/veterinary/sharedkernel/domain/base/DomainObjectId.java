@@ -3,6 +3,7 @@ package mk.ukim.finki.emt.veterinary.sharedkernel.domain.base;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 import lombok.NonNull;
+import org.springframework.data.util.ProxyUtils;
 
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
@@ -34,4 +35,23 @@ public class DomainObjectId implements Serializable {
             throw new RuntimeException("Could not create new instance of " + idClass, ex);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || !getClass().equals(ProxyUtils.getUserClass(obj))) {
+            return false;
+        }
+
+        var other = (DomainObjectId) obj;
+        return id != null && id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id == null ? super.hashCode() : id.hashCode();
+    }
+
 }

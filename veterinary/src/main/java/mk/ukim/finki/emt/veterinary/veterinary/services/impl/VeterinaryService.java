@@ -68,10 +68,8 @@ public class VeterinaryService implements IVeterinaryService {
             throw new ConstraintViolationException("The veterinary form is not valid", constraintViolations);
         }
 
-        var veterinaryToSave = toDomainObject(veterinaryForm);
-        veterinary.setName(veterinaryToSave.getName());
-        veterinary.setAddress(veterinaryToSave.getAddress());
-        veterinary.setVeterinarians(veterinaryToSave.getVeterinarians());
+        veterinary.setName(veterinaryForm.getName());
+        veterinary.setAddress(veterinaryForm.getAddress());
 
         var savedVeterinary = veterinaryRepository.saveAndFlush(veterinary);
         return savedVeterinary.getId();
@@ -109,6 +107,29 @@ public class VeterinaryService implements IVeterinaryService {
 
         veterinaryRepository.saveAndFlush(veterinary);
         emailService.sendEmail(veterinarianForm.getEmail(), "Welcome To Our Web App", "Your auto-generated password is: " + generatedPassword);
+    }
+
+    @Override
+    public void editVeterinarian(VeterinaryId veterinaryId, VeterinarianId veterinarianId, VeterinarianForm veterinarianForm) {
+        Veterinary veterinary = findById(veterinaryId);
+
+        veterinary.editVeterinarian(
+                veterinarianId,
+                veterinarianForm.getName(),
+                veterinarianForm.getSurname(),
+                veterinarianForm.getEmail(),
+                veterinarianForm.getPhone(),
+                veterinarianForm.getAddress(),
+                veterinarianForm.getDateOfEmployment()
+            );
+
+        veterinaryRepository.saveAndFlush(veterinary);
+    }
+
+    @Override
+    public Veterinarian findVeterinarianById(VeterinaryId veterinaryId, VeterinarianId veterinarianId) {
+        Veterinary veterinary = findById(veterinaryId);
+        return veterinary.getVeterinarian(veterinarianId).orElseThrow(VeterinarianNotExistsException::new);
     }
 
     /**

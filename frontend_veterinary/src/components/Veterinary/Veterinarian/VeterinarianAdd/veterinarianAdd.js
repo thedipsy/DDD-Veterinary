@@ -1,10 +1,22 @@
-import React from "react";
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
 const VeterinarianAdd = (props) => {
 
     const navigate = useNavigate(); //da moze da redirektirame na nova pateka
-    const [formData, updateFormData] = React.useState({
+    const id = useParams().id;
+
+    const [veterinary, setVeterinary] = useState({
+        name : "",
+        address : {
+            streetName : "",
+            houseNumber : "",
+            city : "",
+            postalCode : ""
+        }})
+
+    const [formData, updateFormData] = useState({
         name : "",
         surname : "",
         email : "",
@@ -16,7 +28,20 @@ const VeterinarianAdd = (props) => {
         dateOfEmployment: ""
     });
 
-    //e event koj se kreira on change
+    const getVeterinary = () => {
+        VeterinaryService.getVeterinary(id)
+            .then(data => setVeterinary(data.data))
+    }
+
+    const addVeterinarian = (id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment) => {
+        VeterinaryService.addVeterinarian(id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment)
+    }
+
+    useEffect(() => {
+        getVeterinary()
+        }, []
+    )
+
     const handleChange = (e) => {
         updateFormData({
             ...formData,
@@ -36,10 +61,9 @@ const VeterinarianAdd = (props) => {
         const city = formData.city;
         const postalCode = formData.postalCode;
         const dateOfEmployment = formData.dateOfEmployment;
-        //fali veterinary id
 
-        props.onAddVeterinarian(props.veterinary.id.id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment);
-        navigate('/veterinary'); //vrati me na veterinary
+        addVeterinarian(id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment);
+        navigate(`/veterinary/${id}`); //overview na veterinarians vo veterinary
     }
 
     return (
@@ -48,13 +72,16 @@ const VeterinarianAdd = (props) => {
 
             <div className={"row mb-3 mt-5"}>
                 <h1 className="mt-2 mb-2 link-class text-center">
-                    {props.veterinary.name}
+                    {veterinary.name}
                 </h1>
+                <h5 className="margin-bottom-md text-primary mt-2 text-center">
+                    Add a veterinarian
+                </h5>
             </div>
 
             <form onSubmit={onFormSubmit}>
 
-                <div className="row mb-3 mt-5">
+                <div className="row mb-3">
                     <div className="col">
                         <input className="form-control" placeholder="First Name"
                                name="name"
@@ -132,15 +159,13 @@ const VeterinarianAdd = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <button type="submit" className="btn btn-primary btn-lg btn-block w-100">Add Employee</button>
+                        <button type="submit" className="btn btn-primary btn-lg btn-block w-100">Submit</button>
                     </div>
                 </div>
 
             </form>
         </div>
-
     )
-
 }
 
 export default VeterinarianAdd;

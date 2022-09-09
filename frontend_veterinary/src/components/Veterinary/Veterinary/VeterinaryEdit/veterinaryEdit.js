@@ -1,11 +1,22 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import VeterinaryService from "../../../repository/repositoryVeterinary";
+import {useNavigate, useParams} from "react-router-dom";
+import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
+const VeterinaryEdit = () => {
 
-const VeterinaryEdit = (props) => {
     const navigate = useNavigate(); //da moze da redirektirame na nova pateka
-    const [formData, updateFormData] = React.useState({
+    const id = useParams().id;
+
+    const [veterinary, setVeterinary] = useState({
+            name : "",
+            address : {
+                streetName : "",
+                houseNumber : "",
+                city : "",
+                postalCode : ""
+            }})
+
+    const [formData, updateFormData] = useState({
         name : "",
         streetName : "",
         houseNumber : "",
@@ -13,7 +24,20 @@ const VeterinaryEdit = (props) => {
         postalCode : ""
     });
 
-    //e event koj se kreira on change
+    useEffect(() => {
+            // veterinarian region start
+            VeterinaryService.getVeterinary(id)
+                .then(data => setVeterinary(data.data))
+        }, []
+    )
+
+    const editVeterinary = (id, name, streetName, houseNumber, city, postalCode) => {
+        VeterinaryService.editVeterinary(id, name, streetName, houseNumber, city, postalCode)
+            .then(() => {
+                this.loadVeterinaries();
+            })
+    }
+
     const handleChange = (e) => {
         updateFormData({
             ...formData,
@@ -24,21 +48,14 @@ const VeterinaryEdit = (props) => {
     const onFormSubmit = (e) => {
         e.preventDefault(); //ne gi prakjaj vednas podatocite kako post request tuku napravi go slednoto podolu
 
-        const name = formData.name !== "" ? formData.name : props.veterinary.name;
-        const streetName = formData.streetName !== "" ? formData.streetName : props.veterinary.address.streetName;
-        const houseNumber = formData.houseNumber !== "" ? formData.houseNumber : props.veterinary.address.houseNumber;
-        const city = formData.city !== "" ? formData.city : props.veterinary.address.city;
-        const postalCode = formData.postalCode !== "" ? formData.postalCode : props.veterinary.address.postalCode;
+        const name = formData.name !== "" ? formData.name : veterinary.name;
+        const streetName = formData.streetName !== "" ? formData.streetName : veterinary.address.streetName;
+        const houseNumber = formData.houseNumber !== "" ? formData.houseNumber : veterinary.address.houseNumber;
+        const city = formData.city !== "" ? formData.city : veterinary.address.city;
+        const postalCode = formData.postalCode !== "" ? formData.postalCode : veterinary.address.postalCode;
 
-        props.onEditVeterinary(props.veterinary.id.id, name, streetName, houseNumber, city, postalCode);
+        editVeterinary(id, name, streetName, houseNumber, city, postalCode);
         navigate('/veterinary'); //vrati me na veterinary
-    }
-
-    let address
-    if(props.veterinary !== undefined && props.veterinary.address !== undefined){
-        address = props.veterinary.address
-    } else {
-        address = {}
     }
 
     return (
@@ -46,7 +63,7 @@ const VeterinaryEdit = (props) => {
 
             <div className={"row mb-3 mt-5"}>
                 <h1 className="mt-2 mb-2 link-class text-center">
-                    {props.veterinary.name}
+                    {veterinary.name}
                 </h1>
                 <h5 className="margin-bottom-md text-primary mt-2 text-center">
                     Edit general info
@@ -57,7 +74,7 @@ const VeterinaryEdit = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder={props.veterinary.name}
+                        <input className="form-control" placeholder={veterinary.name}
                                name="name"
                                onChange={handleChange}/>
                     </div>
@@ -65,13 +82,13 @@ const VeterinaryEdit = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder={address.streetName}
+                        <input className="form-control" placeholder={veterinary.address.streetName}
                                name="streetName"
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder={address.houseNumber}
+                        <input className="form-control" placeholder={veterinary.address.houseNumber}
                                name="houseNumber"
                                onChange={handleChange}/>
                     </div>
@@ -79,13 +96,13 @@ const VeterinaryEdit = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder={address.city}
+                        <input className="form-control" placeholder={veterinary.address.city}
                                name="city"
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder={address.postalCode}
+                        <input className="form-control" placeholder={veterinary.address.postalCode}
                                name="postalCode"
                                onChange={handleChange}/>
                     </div>
@@ -100,8 +117,6 @@ const VeterinaryEdit = (props) => {
             </form>
         </div>
     )
-
-
 }
 
 export default VeterinaryEdit;

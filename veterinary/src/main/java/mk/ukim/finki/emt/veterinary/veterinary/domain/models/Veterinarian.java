@@ -1,5 +1,6 @@
 package mk.ukim.finki.emt.veterinary.veterinary.domain.models;
 
+import lombok.Data;
 import lombok.Getter;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.emt.veterinary.sharedkernel.domain.valueobjects.Address;
@@ -17,7 +18,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "veterinarian")
-@Getter
+@Data
 public class Veterinarian extends AbstractEntity<VeterinarianId> implements UserDetails {
 
     private String name;

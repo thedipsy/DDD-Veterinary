@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
@@ -12,6 +13,9 @@ code {
     monospace;
 }
 
+.roboto-font {
+  font-family: Roboto;
+}
 
 .table tbody th .heading,
 .table tbody td .heading {
@@ -22,14 +26,19 @@ code {
   color: #252525;
   margin-bottom: 6px;
 }
+
+.time {
+  text-transform: uppercase;
+}
+
  .table tbody th span,
  .table tbody td span {
   color: #100e0e;
   font-size: 18px;
-  text-transform: uppercase;
   margin-bottom: 6px;
   display: block;
 }
+
 .table tbody th span.date,
 .table tbody td span.date {
   color: #656565;
@@ -42,6 +51,8 @@ code {
   margin: 0;
   font-weight: normal;
 }
+
+
 
  .table {
   -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
@@ -98,6 +109,22 @@ code {
 .link-class:hover {
   color: #4125dd;
 }
+
+.link-class-2{
+  text-decoration: none;
+  font-style: oblique;
+  color: #cf057c;
+}
+
+.link-class-2:hover {
+  color: #cf057c;
+}
+
+.date, .time {
+  color: #252525;
+  font-family: Roboto;
+}
+
 .table tbody tr td .event-wrap .categories {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;

@@ -30,7 +30,7 @@ const Header = () => {
                     </li>
                 </ul>
                 <form className={"form-inline mt-2 mt-md-0 ml-3 me-0"}>
-                    <button className={"btn btn-outline-info my-2 my-sm-0"} onClick={logout}>Logout</button>
+                    <button className={"btn btn-outline-info my-2 my-sm-0 me-0"} onClick={logout}>Logout</button>
                 </form>
             </div>);
     } else {
@@ -45,8 +45,8 @@ const Header = () => {
 
     return (
         <header>
-            <nav className={"navbar navbar-expand-md navbar-dark navbar-fixed bg-dark"}>
-                <a className={"navbar-brand ms-2"} href={home}>Veterinary System</a>
+            <nav className={"navbar navbar-expand-md navbar-dark navbar-fixed bg-dark roboto-font"}>
+                <a className={"navbar-brand ms-5 me-5"}>Veterinary System</a>
                 <button className={"navbar-toggler"} type="button" data-toggle="collapse" data-target="#navbarCollapse"
                         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"/>

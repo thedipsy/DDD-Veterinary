@@ -47,12 +47,12 @@ const VeterinaryService = {
         return axios.get(`veterinary/${id}/veterinarians`)
     },
 
-    getVeterinarian: (id) => {
-        return axios.get(`veterinary/veterinarian/${id}`);
+    getVeterinarian: (id, veterinarianId) => {
+        return axios.get(`veterinary/${id}/veterinarian/${veterinarianId}`);
     },
 
-    deleteVeterinarian: (id) => {
-        return axios.delete(`veterinary/veterinarian/delete/${id}`)
+    deleteVeterinarian: (id, veterinarianId) => {
+        return axios.delete(`veterinary/${id}/veterinarian/delete/${veterinarianId}`)
     },
 
     addVeterinarian: (id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment) => {
@@ -71,18 +71,22 @@ const VeterinaryService = {
         })
     },
 
-    editVeterinarian: (id, name, surname, email, phone, address, dateOfEmployment) => {
-        return axios.put(`veterinary/veterinarian/edit/${id}`, {
+    editVeterinarian: (id, veterinarianId, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment) => {
+        return axios.put(`veterinary/${id}/veterinarian/edit/${veterinarianId}`, {
             "name" : name,
             "surname" : surname,
             "email" : email,
             "phone" : phone,
-            "address" : address,
+            "address" : {
+                "streetName" : streetName,
+                "houseNumber" : houseNumber,
+                "city" : city,
+                "postalCode" : postalCode
+            },
             "dateOfEmployment" : dateOfEmployment
         });
     }
     //end veterinarian region
-
 }
 
 export default VeterinaryService;

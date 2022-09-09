@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import mk.ukim.finki.emt.veterinary.veterinary.Config.filters.JwtAuthenticationFilter;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinarian;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinary;
+import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinarianId;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinaryId;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinarianForm;
 import mk.ukim.finki.emt.veterinary.veterinary.services.forms.VeterinaryForm;
@@ -61,11 +62,37 @@ public class VeterinaryResource {
         veterinaryService.editVeterinary(veterinaryId, veterinaryForm);
     }
 
+    @GetMapping("/{id}/veterinarian/{veterinarianId}")
+    public Veterinarian getVeterinarian(@PathVariable String id,
+                                        @PathVariable String veterinarianId){
+        VeterinaryId veterinaryId = new VeterinaryId(id);
+        VeterinarianId veterinarianId1 = new VeterinarianId(veterinarianId);
+        return veterinaryService.findVeterinarianById(veterinaryId, veterinarianId1);
+    }
+
     @PostMapping("/{id}/veterinarian/add")
     public void addVeterinarian(@PathVariable String id,
                                @RequestBody VeterinarianForm veterinarianForm){
         VeterinaryId veterinaryId = new VeterinaryId(id);
         veterinaryService.addVeterinarian(veterinaryId, veterinarianForm);
+    }
+
+    @PutMapping("/{id}/veterinarian/edit/{veterinarianId}")
+    public void editVeterinarian(@PathVariable String id,
+                                 @PathVariable String veterinarianId,
+                                 @RequestBody VeterinarianForm veterinarianForm){
+        VeterinaryId veterinaryId = new VeterinaryId(id);
+        VeterinarianId veterinarianId1 = new VeterinarianId(veterinarianId);
+        veterinaryService.editVeterinarian(veterinaryId, veterinarianId1, veterinarianForm);
+    }
+
+
+    @DeleteMapping("/{id}/veterinarian/delete/{veterinarianId}")
+    public void deleteVeterinarian(@PathVariable String id,
+                                @PathVariable String veterinarianId){
+        VeterinaryId veterinaryId = new VeterinaryId(id);
+        VeterinarianId veterinarianId1 = new VeterinarianId(veterinarianId);
+        veterinaryService.deleteVeterinarian(veterinaryId, veterinarianId1);
     }
 
 

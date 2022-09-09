@@ -17,9 +17,9 @@ const veterinaryTerm = (props) => {
                     </div>
                 </td>
                 <td className={"text-right"}>
-                    <Link title={"Veterinary"} className={"btn btn-outline-primary m-2"} to={`/veterinary/${props.term.id.id}`}>View</Link>
-                    <Link title={"Add Veterinarian"} className={"btn btn-outline-primary m-2"} to={`/veterinary/addVeterinarian/${props.term.id.id}`}>Add Veterinarian</Link>
-                    <Link title={"Edit"} className={"btn btn-outline-primary m-2"} to={`/veterinary/edit/${props.term.id.id}`}>Edit</Link>
+                    <Link title={"Veterinary"} className={"btn btn-outline-success m-2"} to={`/veterinary/${props.term.id.id}`}>View</Link>
+                    <Link title={"Add Veterinarian"} className={"btn btn-outline-success m-2"} to={`/veterinary/${props.term.id.id}/veterinarian`}>Add Veterinarian</Link>
+                    <Link title={"Edit"} className={"btn btn-outline-success m-2"} to={`/veterinary/edit/${props.term.id.id}`}>Edit</Link>
                     <a title={"Delete"} className={"btn btn-outline-danger m-2"} onClick={() => props.onDelete(props.term.id.id)}>Delete</a>
                 </td>
             </tr>

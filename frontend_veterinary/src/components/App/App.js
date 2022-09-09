@@ -14,15 +14,16 @@ import Veterinaries from "../Veterinary/Veterinary/VeterinaryList/veterinaries";
 import VeterinarianAdd from "../Veterinary/Veterinarian/VeterinarianAdd/veterinarianAdd";
 import VeterinaryView from "../Veterinary/Veterinary/VeterinaryView/veterinaryView";
 import VeterinaryEdit from "../Veterinary/Veterinary/VeterinaryEdit/veterinaryEdit";
-import OwnerAdd from "../Owner/OwnerAdd/ownerAdd";
-import OwnerEdit from "../Owner/OwnerEdit/ownerEdit";
-import Owners from "../Owner/OwnerList/owners";
+import OwnerAdd from "../Patients/Owner/OwnerAdd/ownerAdd";
+import OwnerEdit from "../Patients/Owner/OwnerEdit/ownerEdit";
+import Owners from "../Patients/Owner/OwnerList/owners";
 
-import PatientAdd from "../Patient/PatientAdd/patientAdd";
-import PatientEdit from "../Patient/PatientEdit/patientEdit";
-import Patients from "../Patient/PatientList/patients";
+import PatientAdd from "../Patients/Patient/PatientAdd/patientAdd";
+import PatientEdit from "../Patients/Patient/PatientEdit/patientEdit";
+import Patients from "../Patients/Patient/PatientList/patients";
 import AppointmentAdd from "../Appointment/AppointmentAdd/appointmentAdd";
 import VeterinarianEdit from "../Veterinary/Veterinarian/VeterinarianEdit/VeterinarianEdit";
+import PatientsHome from "../Patients/PatientsHome";
 
 class App extends Component {
 
@@ -92,6 +93,11 @@ class App extends Component {
 
 
                             {/*owner region start*/}
+
+
+                            <Route path={"/patientsHome"}
+                                   element={<PatientsHome/>}/>
+
                             <Route path={"/owners"}
                                    element={<Owners veterinary={this.state.owners}
                                                     onDelete={this.deleteOwner}

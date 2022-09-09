@@ -21,6 +21,7 @@ const Veterinary = () => {
 
     useEffect(() => {
             loadVeterinaries()
+            document.body.style.backgroundColor = "#e9ecda"
         }, []
     )
 

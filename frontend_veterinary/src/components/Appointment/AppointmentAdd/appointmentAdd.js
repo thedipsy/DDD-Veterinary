@@ -75,7 +75,7 @@ const AppointmentAdd = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <button type="button" className="btn btn-primary btn-lg btn-block w-100">Sign In</button>
+                        <button type="button" className="btn btn-success btn-lg btn-block w-100">Sign In</button>
                     </div>
                 </div>
 

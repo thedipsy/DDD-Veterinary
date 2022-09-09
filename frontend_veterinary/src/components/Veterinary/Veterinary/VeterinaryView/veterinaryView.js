@@ -41,6 +41,7 @@ const VeterinaryView = () => {
 
     useEffect(() => {
             getVeterinary(id)
+            document.body.style.backgroundColor = "#e9ecda";
         }, []
     )
 

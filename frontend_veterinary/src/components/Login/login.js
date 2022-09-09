@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import LoginService from "../../repository/repositoryLogin";
@@ -38,10 +38,16 @@ const Login = () => {
         })
     }
 
+    useEffect(() => {
+            document.body.style.backgroundColor = "#e9ecda";
+        }, []
+    )
+
     return (
-        <div className="container bootstrap snippets bootdey">
+
+        <div className="container w-50">
             <div className="row login-page">
-                <div className="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+                <div className="col">
                     <img src="https://img.freepik.com/premium-vector/vet-examine-cartoon-veterinary-doctor-clinic-heals-cute-cats-dogs-hospital-domestic-animals-consulting-office-interior-vector-scene-with-puppy-kitten-healthcare-flat-illustration_176516-1890.jpg?w=2000" className="user-avatar img-thumbnail"/>
                         <form role="form" className="ng-pristine ng-valid">
                             <div className="form-content">
@@ -55,7 +61,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="d-grid gap-2">
-                                <button type="submit" className="btn btn-primary btn-lg btn-block" onClick={onFormSubmit}>Sign in</button>
+                                <button type="submit" className="btn btn-success btn-lg btn-block" onClick={onFormSubmit}>Sign in</button>
                             </div>
                         </form>
                 </div>

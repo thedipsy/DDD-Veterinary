@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
 const VeterinaryAdd = (props) => {
 
@@ -21,6 +22,10 @@ const VeterinaryAdd = (props) => {
         })
     };
 
+    const addVeterinary = (name, streetName, houseNumber, city, postalCode) => {
+        VeterinaryService.addVeterinary (name, streetName, houseNumber, city, postalCode)
+    }
+
     const onFormSubmit = (e) => {
         e.preventDefault(); //ne gi prakjaj vednas podatocite kako post request tuku napravi go slednoto podolu
 
@@ -30,15 +35,20 @@ const VeterinaryAdd = (props) => {
         const city = formData.city;
         const postalCode = formData.postalCode;
 
-        props.onAddVeterinary(name, streetName, houseNumber, city, postalCode);
+        addVeterinary(name, streetName, houseNumber, city, postalCode);
         navigate('/veterinary'); //vrati me na veterinary
     }
+
+    useEffect(() => {
+            document.body.style.backgroundColor = "#e9ecda"
+        }, []
+    )
 
     return (
         <div className="container w-50">
 
             <div className={"row mb-3 mt-5"}>
-                <h5 className="margin-bottom-md text-primary mt-2 text-center">
+                <h5 className="margin-bottom-md green-text mt-2 text-center">
                     Add a new vet clinic
                 </h5>
             </div>
@@ -88,7 +98,7 @@ const VeterinaryAdd = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <button type="submit" className="btn btn-primary btn-lg btn-block w-100">Submit</button>
+                        <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>
                 </div>
 

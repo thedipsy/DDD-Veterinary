@@ -76,7 +76,7 @@ const VeterinarianEdit = (props) => {
         <div className="container w-50">
 
             <div className={"row mb-3 mt-5"}>
-                <h5 className="margin-bottom-md text-primary mt-2 text-center">
+                <h5 className="margin-bottom-md green-text mt-2 text-center">
                     Edit Veterinarian info
                 </h5>
             </div>
@@ -152,7 +152,7 @@ const VeterinarianEdit = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <button type="submit" className="btn btn-primary btn-lg btn-block w-100">Submit</button>
+                        <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>
                 </div>
 

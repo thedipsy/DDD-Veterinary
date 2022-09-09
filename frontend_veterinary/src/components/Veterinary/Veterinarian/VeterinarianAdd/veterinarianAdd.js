@@ -74,7 +74,7 @@ const VeterinarianAdd = (props) => {
                 <h1 className="mt-2 mb-2 link-class text-center">
                     {veterinary.name}
                 </h1>
-                <h5 className="margin-bottom-md text-primary mt-2 text-center">
+                <h5 className="margin-bottom-md green-text mt-2 text-center">
                     Add a veterinarian
                 </h5>
             </div>
@@ -159,7 +159,7 @@ const VeterinarianAdd = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <button type="submit" className="btn btn-primary btn-lg btn-block w-100">Submit</button>
+                        <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>
                 </div>
 

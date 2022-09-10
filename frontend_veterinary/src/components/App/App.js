@@ -23,7 +23,7 @@ import PatientEdit from "../Patients/Patient/PatientEdit/patientEdit";
 import Patients from "../Patients/Patient/PatientList/patients";
 import AppointmentAdd from "../Appointment/AppointmentAdd/appointmentAdd";
 import VeterinarianEdit from "../Veterinary/Veterinarian/VeterinarianEdit/VeterinarianEdit";
-import PatientsHome from "../Patients/PatientsHome";
+import PatientsHome from "../Patients/Home/PatientsHome";
 
 class App extends Component {
 
@@ -95,7 +95,7 @@ class App extends Component {
                             {/*owner region start*/}
 
 
-                            <Route path={"/patientsHome"}
+                            <Route path={"/home"}
                                    element={<PatientsHome/>}/>
 
                             <Route path={"/owners"}
@@ -104,9 +104,9 @@ class App extends Component {
                                                     onEdit={this.editOwner}/>}/>
 
                             <Route path={"/owners/add"}
-                                   element={<OwnerAdd onAddOwner={this.addOwner}/>}/>
+                                   element={<OwnerAdd />}/>
 
-                            <Route path={"/owners/edit/:id"}
+                            <Route path={"/owner/edit/:id"}
                                    element={<OwnerEdit Owner={this.state.selectedOwner}
                                                        onEditOwner={this.editOwner}/>}/>
                             {/*owner region end*/}

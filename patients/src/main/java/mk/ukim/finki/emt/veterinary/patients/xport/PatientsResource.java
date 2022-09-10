@@ -44,7 +44,7 @@ public class PatientsResource {
     public void editOwner(@PathVariable String id,
                                @RequestBody OwnerForm ownerForm){
         OwnerId ownerId = new OwnerId(id);
-//        ownerService.(veterinaryId, veterinaryForm);
+        ownerService.editOwner(ownerId, ownerForm);
     }
 
     @PostMapping("/{id}/owner/add")

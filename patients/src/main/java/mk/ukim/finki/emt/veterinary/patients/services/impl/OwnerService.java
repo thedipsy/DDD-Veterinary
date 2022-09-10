@@ -38,6 +38,25 @@ public class OwnerService implements IOwnerService {
                 .orElseThrow(OwnerNotExistsException::new);
     }
 
+
+    @Override
+    public void editOwner(OwnerId ownerId, OwnerForm ownerForm) {
+        Owner owner = findById(ownerId);
+        Objects.requireNonNull(ownerForm, "Owner must not be null");
+        var constraintViolations = validator.validate(ownerForm);
+        if(constraintViolations.size() > 0){
+            throw new ConstraintViolationException("The owner form is not valid", constraintViolations);
+        }
+
+        owner.setName(ownerForm.getName());
+        owner.setSurname(ownerForm.getSurname());
+        owner.setEmail(ownerForm.getEmail());
+        owner.setPhone(ownerForm.getPhone());
+        owner.setAddress(owner.getAddress());
+
+       ownerRepository.saveAndFlush(owner);
+    }
+
     @Override
     public OwnerId saveOwner(OwnerForm ownerForm) {
         Objects.requireNonNull(ownerForm, "Owner must not be null");

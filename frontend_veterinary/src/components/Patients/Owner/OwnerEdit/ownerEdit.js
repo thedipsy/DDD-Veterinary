@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import VeterinaryService from "../../../../repository/repositoryVeterinary";
+import PatientService from "../../../../repository/repositoryPatinet";
 
-const VeterinarianAdd = (props) => {
+const OwnerEdit = () => {
 
-    const navigate = useNavigate(); //da moze da redirektirame na nova pateka
+    const navigate = useNavigate();
     const id = useParams().id;
 
-    const [veterinary, setVeterinary] = useState({
+    const [owner, setOwner] = useState({
         name : "",
+        surname : "",
+        email : "",
+        phone : "",
         address : {
             streetName : "",
             houseNumber : "",
@@ -25,23 +28,11 @@ const VeterinarianAdd = (props) => {
         houseNumber : "",
         city : "",
         postalCode : "",
-        dateOfEmployment: ""
     });
 
-    const getVeterinary = () => {
-        VeterinaryService.getVeterinary(id)
-            .then(data => setVeterinary(data.data))
+    const editOwner = (id, name, surname, email, phone, streetName, houseNumber, city, postalCode) => {
+        PatientService.editOwner(id, name, surname, email, phone, streetName, houseNumber, city, postalCode)
     }
-
-    const addVeterinarian = (id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment) => {
-        VeterinaryService.addVeterinarian(id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment)
-    }
-
-    useEffect(() => {
-        getVeterinary()
-        document.body.style.backgroundColor = "#e9ecda"
-        }, []
-    )
 
     const handleChange = (e) => {
         updateFormData({
@@ -50,68 +41,68 @@ const VeterinarianAdd = (props) => {
         })
     };
 
+    useEffect(() => {
+            PatientService.getOwner(id)
+                .then(data => setOwner(data.data))
+            document.body.style.backgroundColor = "#e9ecda";
+        }, []
+    )
+
     const onFormSubmit = (e) => {
-        e.preventDefault(); //ne gi prakjaj vednas podatocite kako post request tuku napravi go slednoto podolu
+        e.preventDefault();
 
-        const name = formData.name;
-        const surname = formData.surname;
-        const email = formData.email;
-        const phone = formData.phone;
-        const streetName = formData.streetName;
-        const houseNumber = formData.houseNumber;
-        const city = formData.city;
-        const postalCode = formData.postalCode;
-        const dateOfEmployment = formData.dateOfEmployment;
+        const name = formData.name !== "" ? formData.name : owner.name;
+        const surname = formData.surname !== "" ? formData.surname : owner.surname;
+        const email = formData.email !== "" ? formData.email : owner.email;
+        const phone = formData.phone !== "" ? formData.phone : owner.phone;
+        const streetName = formData.streetName !== "" ? formData.streetName : owner.address.streetName;
+        const houseNumber = formData.houseNumber !== "" ? formData.houseNumber : owner.address.houseNumber;
+        const city = formData.city !== "" ? formData.city : owner.address.city;
+        const postalCode = formData.postalCode !== "" ? formData.postalCode : owner.address.postalCode;
 
-        addVeterinarian(id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment);
-        navigate(`/veterinary/${id}`); //overview na veterinarians vo veterinary
+        editOwner(id, name, surname, email, phone, streetName, houseNumber, city, postalCode);
+        navigate(`/owners`); //overview na owners
     }
 
     return (
 
         <div className="container w-50">
-
             <div className={"row mb-3 mt-5"}>
                 <h1 className="mt-2 mb-2 link-class text-center">
-                    {veterinary.name}
+
                 </h1>
                 <h5 className="margin-bottom-md green-text mt-2 text-center">
-                    Add a veterinarian
+                    Add a new owner
                 </h5>
             </div>
-
             <form onSubmit={onFormSubmit}>
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="First Name"
+                        <input className="form-control" placeholder={owner.name}
                                name="name"
-                               required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Last Name"
+                        <input className="form-control" placeholder={owner.surname}
                                name="surname"
-                               required
                                onChange={handleChange}/>
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Email Address"
+                        <input className="form-control" placeholder={owner.email}
                                name="email"
-                               required
                                onChange={handleChange}/>
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Phone"
+                        <input className="form-control" placeholder={owner.phone}
                                name="phone"
-                               required
                                onChange={handleChange}/>
                     </div>
                 </div>
@@ -119,41 +110,28 @@ const VeterinarianAdd = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Street Name"
+                        <input className="form-control" placeholder={owner.address.streetName}
                                name="streetName"
-                               required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Building Number"
+                        <input className="form-control" placeholder={owner.address.houseNumber}
                                name="houseNumber"
-                               required
                                onChange={handleChange}/>
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="City"
+                        <input className="form-control" placeholder={owner.address.city}
                                name="city"
-                               required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Postal Code"
+                        <input className="form-control" placeholder={owner.address.postalCode}
                                name="postalCode"
-                               required
-                               onChange={handleChange}/>
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <div className="col">
-                        <input className="form-control" type={"date"}
-                               name="dateOfEmployment"
-                               required
                                onChange={handleChange}/>
                     </div>
                 </div>
@@ -169,4 +147,4 @@ const VeterinarianAdd = (props) => {
     )
 }
 
-export default VeterinarianAdd;
+export default OwnerEdit;

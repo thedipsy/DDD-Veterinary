@@ -14,23 +14,33 @@ const PatientService = {
         return axios.delete(`/owner/delete/${id}`)
     },
 
-    addOwner: (name, surname, phone, email, address) => {
+    addOwner: (name, surname, email, phone, streetName, houseNumber, city, postalCode) => {
         return axios.post("/owner", {
             "name" : name,
             "surname" : surname,
-            "phone" : phone,
             "email" : email,
-            "address" : address
+            "phone" : phone,
+            "address" : {
+                "streetName" : streetName,
+                "houseNumber" : houseNumber,
+                "city" : city,
+                "postalCode" : postalCode
+            }
         })
     },
 
-    editOwner: (id, name, surname, phone, email, address) => {
+    editOwner: (id, name, surname, email, phone, streetName, houseNumber, city, postalCode) => {
         return axios.put(`/owner/edit/${id}`, {
             "name" : name,
             "surname" : surname,
-            "phone" : phone,
             "email" : email,
-            "address" : address
+            "phone" : phone,
+            "address" : {
+                "streetName" : streetName,
+                "houseNumber" : houseNumber,
+                "city" : city,
+                "postalCode" : postalCode
+            }
         });
     },
 

@@ -1,23 +1,31 @@
-import {useNavigate} from "react-router-dom";
-import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React, {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import PatientService from "../../../../repository/repositoryPatinet";
 
-const OwnerAdd = (props) => {
+const OwnerAdd = () => {
 
-    const navigate = useNavigate(); //da moze da redirektirame na nova pateka
-    const [formData, updateFormData] = React.useState({
-        name: "",
-        surname: "",
-        phone: "",
-        email: "",
+    const navigate = useNavigate();
+
+    const [formData, updateFormData] = useState({
+        name : "",
+        surname : "",
+        email : "",
+        phone : "",
         streetName : "",
         houseNumber : "",
         city : "",
         postalCode : "",
-        dateOfEmployment: ""
     });
 
-    //e event koj se kreira on change
+    const addOwner = (name, surname, email, phone, streetName, houseNumber, city, postalCode) => {
+        PatientService.addOwner(name, surname, email, phone, streetName, houseNumber, city, postalCode)
+    }
+
+    useEffect(() => {
+            document.body.style.backgroundColor = "#e9ecda"
+        }, []
+    )
+
     const handleChange = (e) => {
         updateFormData({
             ...formData,
@@ -26,7 +34,7 @@ const OwnerAdd = (props) => {
     };
 
     const onFormSubmit = (e) => {
-        e.preventDefault(); //ne gi prakjaj vednas podatocite kako post request tuku napravi go slednoto podolu
+        e.preventDefault();
 
         const name = formData.name;
         const surname = formData.surname;
@@ -37,25 +45,24 @@ const OwnerAdd = (props) => {
         const city = formData.city;
         const postalCode = formData.postalCode;
 
-        props.onAddOwner(name, surname, phone, email, streetName, houseNumber, city, postalCode);
-        navigate('/owners'); //vrati me na owners
+        addOwner(name, surname, email, phone, streetName, houseNumber, city, postalCode);
+        navigate(`/owners`); //overview na owners
     }
 
     return (
-        <div className="container w-50">
 
+        <div className="container w-50">
             <div className={"row mb-3 mt-5"}>
                 <h1 className="mt-2 mb-2 link-class text-center">
-                    {props.veterinary.name}
+
                 </h1>
-                <h5 className="margin-bottom-md text-primary mt-2 text-center">
-                    Add new veterinarian
+                <h5 className="margin-bottom-md green-text mt-2 text-center">
+                    Add a new owner
                 </h5>
             </div>
-
             <form onSubmit={onFormSubmit}>
 
-                <div className="row mb-3 mt-5">
+                <div className="row mb-3">
                     <div className="col">
                         <input className="form-control" placeholder="First Name"
                                name="name"
@@ -124,13 +131,13 @@ const OwnerAdd = (props) => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <button type="button" className="btn btn-primary btn-lg btn-block w-100">Add owner</button>
+                        <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>
                 </div>
 
             </form>
         </div>
-
     )
 }
+
 export default OwnerAdd;

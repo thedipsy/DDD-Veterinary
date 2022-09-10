@@ -34,7 +34,7 @@ const PatientAdd = (props) => {
         const birthDate = formData.birthDate;
         const gender = formData.gender;
 
-        props.onAddPatient(name, birthDate, animalSpecie, breed, microchip, weight, gender);
+        props.onEditPatient(name, birthDate, animalSpecie, breed, microchip, weight, gender);
         navigate('/patients'); //vrati me na patients
     }
 
@@ -43,8 +43,8 @@ const PatientAdd = (props) => {
         <div className="container w-50">
 
             <div className={"row mb-3 mt-5"}>
-                <h5 className="margin-bottom-md text-primary mt-2 text-center">
-                    Add a new patient
+                <h5 className="margin-bottom-md green-text mt-2 text-center">
+                    Add new patient
                 </h5>
             </div>
 
@@ -88,19 +88,19 @@ const PatientAdd = (props) => {
                         <div className="form-check form-check-inline">
                             <input className="form-check-input" type="radio" name="gender"
                                    value="male"/>
-                                <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
+                            <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
                         </div>
                         <div className="form-check form-check-inline">
                             <input className="form-check-input" type="radio" name="gender"
                                    value="female"/>
-                                <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
+                            <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
                         </div>
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col">
-                        <button type="button" className="btn btn-primary btn-lg btn-block w-100">Add patient</button>
+                        <button type="button" className="btn btn-success btn-lg btn-block w-100">Add patient</button>
                     </div>
                 </div>
 

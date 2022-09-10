@@ -20,4 +20,5 @@ public interface IOwnerService {
     OwnerId saveOwner(OwnerForm ownerForm);
     void deleteOwner(OwnerId ownerId) throws  OwnerNotExistsException;
 
+    void editOwner(OwnerId ownerId, OwnerForm ownerForm);
 }

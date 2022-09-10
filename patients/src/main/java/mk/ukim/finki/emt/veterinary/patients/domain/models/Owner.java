@@ -1,5 +1,7 @@
 package mk.ukim.finki.emt.veterinary.patients.domain.models;
 
+import lombok.Data;
+import lombok.Getter;
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.AnimalSpecie;
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.Gender;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.id.AnimalId;
@@ -16,6 +18,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "owner")
+@Data
 public class Owner extends AbstractEntity<OwnerId> {
 
     private String name;

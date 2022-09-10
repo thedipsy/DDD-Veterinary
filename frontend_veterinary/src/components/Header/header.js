@@ -23,7 +23,7 @@ const Header = () => {
                     <Link className="nav-link" to={"/appointments"}>Appointments</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={"/patients"}>Patients</Link>
+                    <Link className="nav-link" to={"/home"}>Patients</Link>
                 </li>
                 <li className="nav-item">
                     <button className={"btn btn-outline-info my-2 my-sm-0 me-0 "} onClick={logout}>Logout</button>

@@ -48,32 +48,43 @@ const PatientService = {
 
 
     //patient region
-    fetchPatients: () => {
-        return axios.get("owner/patient")
+
+    getAnimalSpecies: () => {
+        return axios.get(`owner/patients/animalSpecies`);
     },
 
-    getPatient: (id) => {
-        return axios.get(`owner/patient/${id}`);
+    getWeightBaseUnits: () => {
+        return axios.get(`owner/patients/weightUnits`);
     },
 
-    deletePatient: (id) => {
-        return axios.delete(`owner/patient/delete/${id}`)
+    getPatient: (id, patientId) => {
+        return axios.get(`owner/${id}/patient/${patientId}`);
     },
 
-    addPatient: (name, birthDate, animalSpecie, breed, microchip, weight, gender) => {
-        return axios.post("owner/patient/add", {
+    deletePatient: (id, patientId) => {
+        return axios.delete(`owner/${id}/patient/delete/${patientId}`)
+    },
+
+    addPatient: (id, name, birthDate, animalSpecie, breed, serialNumber, dateImplemented, amount, baseUnit, gender) => {
+        return axios.post(`owner/${id}/patient`, {
             "name" : name,
             "birthDate" : birthDate,
             "animalSpecie" : animalSpecie,
             "breed" : breed,
-            "microchip" : microchip,
-            "weight" : weight,
+            "microchip" : {
+                "serialNumber" : serialNumber,
+                "dateImplemented" : dateImplemented
+            },
+            "weight" : {
+                "amount" : amount,
+                "baseUnit" : baseUnit
+            },
             "gender" : gender
         })
     },
 
-    editPatient: (id, name, birthDate, animalSpecie, breed, microchip, weight, gender) => {
-        return axios.put(`owner/patient/edit/${id}`, {
+    editPatient: (id, patientId, name, birthDate, animalSpecie, breed, microchip, weight, gender) => {
+        return axios.put(`owner/${id}/patient/edit/${patientId}`, {
             "name" : name,
             "birthDate" : birthDate,
             "animalSpecie" : animalSpecie,

@@ -37,7 +37,6 @@ const Owners = () => {
                     </div>
                 </div>
 
-
                 <div className={"row"}>
                     <div className={"row"}>
                         <table className={"table table-striped"}>

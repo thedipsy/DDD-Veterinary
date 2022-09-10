@@ -24,6 +24,7 @@ import Patients from "../Patients/Patient/PatientList/patients";
 import AppointmentAdd from "../Appointment/AppointmentAdd/appointmentAdd";
 import VeterinarianEdit from "../Veterinary/Veterinarian/VeterinarianEdit/VeterinarianEdit";
 import PatientsHome from "../Patients/Home/PatientsHome";
+import OwnerView from "../Patients/Owner/OwnerView/ownerView";
 
 class App extends Component {
 
@@ -74,57 +75,43 @@ class App extends Component {
 
                             <Route path={"/veterinary/:id/veterinarian/edit/:veterinarianId"}
                                    element={<VeterinarianEdit/>}/>
-
-
-
                             {/*veterinary region end*/}
 
-
-                            {/*veterinarian region start*/}
-                            {/*<Route path={"/veterinarians"}*/}
-                            {/*       element={<Veterinarians veterinary={this.state.veterinarians}*/}
-                            {/*                               onDelete={this.deleteVeterinarian}*/}
-                            {/*                               onEdit={this.editVeterinarian}/>}/>*/}
-
-                            {/*<Route path={"/veterinarian/edit/:id"}*/}
-                            {/*       element={<VeterinarianEdit veterinarian={this.state.selectedVeterinarian}*/}
-                            {/*                                  onEditVeterinarian={this.editVeterinarian}/>}/>*/}
-                            {/*veterinarian region end*/}
-
-
-                            {/*owner region start*/}
-
-
+                            {/*patients region start*/}
                             <Route path={"/home"}
                                    element={<PatientsHome/>}/>
 
                             <Route path={"/owners"}
-                                   element={<Owners veterinary={this.state.owners}
-                                                    onDelete={this.deleteOwner}
-                                                    onEdit={this.editOwner}/>}/>
+                                   element={<Owners />}/>
 
                             <Route path={"/owners/add"}
                                    element={<OwnerAdd />}/>
 
+                            <Route path={"/owner/:id"}
+                                   element={<OwnerView/>}/>
+
                             <Route path={"/owner/edit/:id"}
-                                   element={<OwnerEdit Owner={this.state.selectedOwner}
-                                                       onEditOwner={this.editOwner}/>}/>
-                            {/*owner region end*/}
+                                   element={<OwnerEdit/>}/>
+
+                            <Route path={"/owner/:id/patient/add"}
+                                   element={<PatientAdd/>}/>
 
 
-                            {/*patient region start*/}
+                            {/*patients region end*/}
+
+
                             <Route path={"/patients"}
                                    element={<Patients patients={this.state.patients}
                                                       onDelete={this.deletePatient}
                                                       onEdit={this.editPatient}/>}/>
 
-                            <Route path={"/patients/add"}
-                                   element={<PatientAdd onAddPatient={this.addPatient}/>}/>
+
 
                             <Route path={"/patients/edit/:id"}
                                    element={<PatientEdit patient={this.state.selectedPatient}
                                                          onEditPatient={this.editPatient}/>}/>
-                            {/*patient region end*/}
+
+
 
                             {/*appointment region start*/}
                             {/*<Route path={"/appointment"}*/}
@@ -190,19 +177,7 @@ class App extends Component {
 
 
     // patient region start
-    loadPatients = () => {
-        PatientService.fetchOwners()
-            .then((data) => {
 
-                if (data.data.length) {
-                    data.data.forEach(v => {
-                        this.setState(prevState => ({
-                            patients: [...prevState.patients, {"name": v.animals}]
-                        }))
-                    })
-                }
-            })
-    }
     deletePatient = (id) => {
         PatientService.deletePatient(id)
             .then(() => {
@@ -230,43 +205,6 @@ class App extends Component {
             })
     }
     // patient region end
-
-    // owner region start
-    loadOwners = () => {
-        PatientService.fetchOwners()
-            .then((data) => {
-                this.setState({
-                    owners: data.data
-                })
-            })
-    }
-    deleteOwner = (id) => {
-        PatientService.deleteOwner(id)
-            .then(() => {
-                this.loadOwners();
-            })
-    }
-    getOwner = (id) => {
-        PatientService.getOwner(id)
-            .then((data) => {
-                this.setState(({
-                    selectedOwner: data.data
-                }))
-            })
-    }
-    addOwner = (name, surname, phone, email, streetName, houseNumber, city, postalCode) => {
-        PatientService.addOwner(name, surname, phone, email, streetName, houseNumber, city, postalCode)
-            .then(() => {
-                this.loadOwners();
-            })
-    }
-    editOwner = (id, name, surname, phone, email, address) => {
-        PatientService.addOwner(name, surname, phone, email, address)
-            .then(() => {
-                this.loadOwners();
-            })
-    }
-    // owner region end
 
 }
 

@@ -72,7 +72,7 @@ const OwnerEdit = () => {
 
                 </h1>
                 <h5 className="margin-bottom-md green-text mt-2 text-center">
-                    Add a new owner
+                    Edit owner information
                 </h5>
             </div>
             <form onSubmit={onFormSubmit}>

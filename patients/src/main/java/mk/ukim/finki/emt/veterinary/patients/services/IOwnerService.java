@@ -2,6 +2,7 @@ package mk.ukim.finki.emt.veterinary.patients.services;
 
 import mk.ukim.finki.emt.veterinary.patients.domain.exceptions.AnimalNotExistsException;
 import mk.ukim.finki.emt.veterinary.patients.domain.exceptions.OwnerNotExistsException;
+import mk.ukim.finki.emt.veterinary.patients.domain.models.Animal;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.Owner;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.id.AnimalId;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.id.OwnerId;
@@ -21,4 +22,8 @@ public interface IOwnerService {
     void deleteOwner(OwnerId ownerId) throws  OwnerNotExistsException;
 
     void editOwner(OwnerId ownerId, OwnerForm ownerForm);
+
+    Animal findPatientById(OwnerId ownerId, AnimalId patientId1);
+
+    void editPatient(OwnerId ownerId, AnimalId patientId1, AnimalForm animalForm);
 }

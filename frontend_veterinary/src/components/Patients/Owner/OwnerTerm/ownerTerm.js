@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const OwnerTerm = (props) => {
 
@@ -13,7 +13,7 @@ const OwnerTerm = (props) => {
                             <span>{props.term.phone}</span>
                         </div>
                         <div className="date">
-                            <span>{props.term.username}</span>
+                            <span>{props.term.email}</span>
                         </div>
                         <div className="time">
                             <span>{props.term.address.streetName} {props.term.address.houseNumber}, {props.term.address.city} {props.term.address.postalCode}</span>
@@ -22,7 +22,8 @@ const OwnerTerm = (props) => {
                 </div>
             </td>
             <td className={"text-right"}>
-                <a title={"Delete"} className={"btn btn-success m-2"}>View Owner</a>
+                <Link title={"View"} className={"btn btn-success m-2"}  to={`/owner/${props.term.id.id}`} >View Owner</Link>
+                <Link title={"Add Patient"} className={"btn btn-success m-2"} to={`/owner/${props.term.id.id}/patient/add`}>Add patient</Link>
                 <a title={"Delete"} className={"btn btn-success m-2"} onClick={() => props.onDelete(props.term.id.id)}>Delete Owner</a>
                 <Link title={"Edit"} className={"btn btn-success m-2"} to={`/owner/edit/${props.term.id.id}`}>Edit Owner</Link>
             </td>

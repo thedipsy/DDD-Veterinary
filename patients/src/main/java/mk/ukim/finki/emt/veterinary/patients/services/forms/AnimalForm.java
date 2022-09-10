@@ -5,26 +5,25 @@ import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.AnimalSpecie;
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.Gender;
 import mk.ukim.finki.emt.veterinary.patients.domain.valueobjects.Microchip;
 import mk.ukim.finki.emt.veterinary.patients.domain.valueobjects.Weight;
-import org.hibernate.annotations.NotFound;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
 public class AnimalForm {
 
-    @NotFound
+    @NotNull
     private String name;
-    @NotFound
+    @NotNull
     private Date birthDate;
-    @NotFound
+    @NotNull
     private AnimalSpecie animalSpecie;
-    @NotFound
+    @NotNull
     private String breed;
-    @NotFound
     private Microchip microchip;
-    @NotFound
+    @NotNull
     private Weight weight;
-    @NotFound
+    @NotNull
     private Gender gender;
 
 }

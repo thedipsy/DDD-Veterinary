@@ -3,6 +3,7 @@ package mk.ukim.finki.emt.veterinary.patients.services.impl;
 import lombok.AllArgsConstructor;
 import mk.ukim.finki.emt.veterinary.patients.domain.exceptions.AnimalNotExistsException;
 import mk.ukim.finki.emt.veterinary.patients.domain.exceptions.OwnerNotExistsException;
+import mk.ukim.finki.emt.veterinary.patients.domain.models.Animal;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.Owner;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.id.AnimalId;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.id.OwnerId;
@@ -17,7 +18,6 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -38,7 +38,6 @@ public class OwnerService implements IOwnerService {
                 .orElseThrow(OwnerNotExistsException::new);
     }
 
-
     @Override
     public void editOwner(OwnerId ownerId, OwnerForm ownerForm) {
         Owner owner = findById(ownerId);
@@ -55,6 +54,31 @@ public class OwnerService implements IOwnerService {
         owner.setAddress(owner.getAddress());
 
        ownerRepository.saveAndFlush(owner);
+    }
+
+    @Override
+    public Animal findPatientById(OwnerId ownerId, AnimalId patientId) {
+        Owner owner = findById(ownerId);
+        return owner.getAnimal(patientId).orElseThrow(AnimalNotExistsException::new);
+
+    }
+
+    @Override
+    public void editPatient(OwnerId ownerId, AnimalId patientId, AnimalForm animalForm) {
+        Owner owner = findById(ownerId);
+
+        owner.editAnimal(
+                patientId,
+                animalForm.getName(),
+                animalForm.getBirthDate(),
+                animalForm.getAnimalSpecie(),
+                animalForm.getBreed(),
+                animalForm.getMicrochip(),
+                animalForm.getWeight(),
+                animalForm.getGender()
+        );
+
+        ownerRepository.saveAndFlush(owner);
     }
 
     @Override

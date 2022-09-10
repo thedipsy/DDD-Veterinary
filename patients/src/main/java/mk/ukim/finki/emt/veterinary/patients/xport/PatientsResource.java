@@ -1,7 +1,11 @@
 package mk.ukim.finki.emt.veterinary.patients.xport;
 
 import lombok.AllArgsConstructor;
+import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.AnimalSpecie;
+import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.WeightBaseUnit;
+import mk.ukim.finki.emt.veterinary.patients.domain.models.Animal;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.Owner;
+import mk.ukim.finki.emt.veterinary.patients.domain.models.id.AnimalId;
 import mk.ukim.finki.emt.veterinary.patients.domain.models.id.OwnerId;
 import mk.ukim.finki.emt.veterinary.patients.services.IOwnerService;
 import mk.ukim.finki.emt.veterinary.patients.services.forms.AnimalForm;
@@ -47,10 +51,47 @@ public class PatientsResource {
         ownerService.editOwner(ownerId, ownerForm);
     }
 
-    @PostMapping("/{id}/owner/add")
-    public void addVeterinarian(@PathVariable String id,
+    @PostMapping("/{id}/patient")
+    public void addPatient(@PathVariable String id,
                                @RequestBody AnimalForm animalForm){
         OwnerId ownerId = new OwnerId(id);
         ownerService.addAnimal(ownerId, animalForm);
     }
+
+    @GetMapping("/{id}/patient/{patientId}")
+    public Animal getAnimal(@PathVariable String id,
+                                  @PathVariable String patientId){
+        OwnerId ownerId = new OwnerId(id);
+        AnimalId patientId1 = new AnimalId(patientId);
+        return ownerService.findPatientById(ownerId, patientId1);
+    }
+
+    @PutMapping("/{id}/patient/edit/{patientId}")
+    public void editPatient(@PathVariable String id,
+                                 @PathVariable String patientId,
+                                 @RequestBody AnimalForm animalForm){
+        OwnerId ownerId = new OwnerId(id);
+        AnimalId patientId1 = new AnimalId(patientId);
+        ownerService.editPatient(ownerId, patientId1, animalForm);
+    }
+
+
+    @DeleteMapping("/{id}/patient/delete/{patientId}")
+    public void deletePatient(@PathVariable String id,
+                                   @PathVariable String patientId){
+        OwnerId ownerId = new OwnerId(id);
+        AnimalId patientId1 = new AnimalId(patientId);
+        ownerService.deleteAnimal(ownerId, patientId1);
+    }
+
+    @GetMapping("/patients/animalSpecies")
+    public List<AnimalSpecie> getAnimalSpecies(){
+        return List.of(AnimalSpecie.values());
+    }
+
+    @GetMapping("/patients/weightUnits")
+    public List<WeightBaseUnit> getWeightUnits(){
+        return List.of(WeightBaseUnit.values());
+    }
+
 }

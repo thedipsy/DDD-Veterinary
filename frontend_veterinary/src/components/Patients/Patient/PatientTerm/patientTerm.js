@@ -1,13 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const patientTerm = (props) => {
+const PatientTerm = (props) => {
 
     return(
         <tr className="inner-box">
             <th scope="row">
                 <div className="event-date">
-                    <span>1</span>
+                    <span>{props.num+1}</span>
                 </div>
             </th>
             <td>
@@ -34,4 +34,4 @@ const patientTerm = (props) => {
 
 }
 
-export default patientTerm;
+export default PatientTerm;

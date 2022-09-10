@@ -1,5 +1,6 @@
 package mk.ukim.finki.emt.veterinary.patients.domain.models;
 
+import lombok.Data;
 import lombok.Getter;
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.AnimalSpecie;
 import mk.ukim.finki.emt.veterinary.patients.domain.enumeration.Gender;
@@ -13,7 +14,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "animal")
-@Getter
+@Data
 public class Animal extends AbstractEntity<AnimalId> {
 
     @Column(nullable = false)

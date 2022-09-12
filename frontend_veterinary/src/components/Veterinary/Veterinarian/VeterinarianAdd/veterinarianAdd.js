@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
-const VeterinarianAdd = (props) => {
+const VeterinarianAdd = () => {
 
-    const navigate = useNavigate(); //da moze da redirektirame na nova pateka
+    const history = useHistory();
     const id = useParams().id;
 
     const [veterinary, setVeterinary] = useState({
@@ -35,6 +35,9 @@ const VeterinarianAdd = (props) => {
 
     const addVeterinarian = (id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment) => {
         VeterinaryService.addVeterinarian(id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment)
+            .then( () =>
+                history.push(`/veterinary/${id}`)
+            )
     }
 
     useEffect(() => {
@@ -51,7 +54,7 @@ const VeterinarianAdd = (props) => {
     };
 
     const onFormSubmit = (e) => {
-        e.preventDefault(); //ne gi prakjaj vednas podatocite kako post request tuku napravi go slednoto podolu
+        e.preventDefault();
 
         const name = formData.name;
         const surname = formData.surname;
@@ -64,7 +67,7 @@ const VeterinarianAdd = (props) => {
         const dateOfEmployment = formData.dateOfEmployment;
 
         addVeterinarian(id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment);
-        navigate(`/veterinary/${id}`); //overview na veterinarians vo veterinary
+
     }
 
     return (

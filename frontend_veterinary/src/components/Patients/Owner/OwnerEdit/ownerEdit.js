@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import PatientService from "../../../../repository/repositoryPatinet";
+import {useHistory, useParams} from "react-router-dom";
+import PatientService from "../../../../repository/repositoryPatient";
 
 const OwnerEdit = () => {
 
-    const navigate = useNavigate();
+    const history = useHistory();
     const id = useParams().id;
 
     const [owner, setOwner] = useState({
@@ -32,6 +32,9 @@ const OwnerEdit = () => {
 
     const editOwner = (id, name, surname, email, phone, streetName, houseNumber, city, postalCode) => {
         PatientService.editOwner(id, name, surname, email, phone, streetName, houseNumber, city, postalCode)
+            .then( () => {
+                history.push(`/owner`)
+            })
     }
 
     const handleChange = (e) => {
@@ -61,7 +64,6 @@ const OwnerEdit = () => {
         const postalCode = formData.postalCode !== "" ? formData.postalCode : owner.address.postalCode;
 
         editOwner(id, name, surname, email, phone, streetName, houseNumber, city, postalCode);
-        navigate(`/owners`); //overview na owners
     }
 
     return (

@@ -1,11 +1,11 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import PatientService from "../../../../repository/repositoryPatinet";
+import PatientService from "../../../../repository/repositoryPatient";
 
 const PatientAdd = () => {
 
-    const navigate = useNavigate();
+    const history = useHistory();
     const id = useParams().id;
 
     const [owner, setOwner] = useState({
@@ -37,8 +37,11 @@ const PatientAdd = () => {
 
     const addPatient = (id, name, birthDate, animalSpecie, breed, serialNumber, dateImplemented, amount, baseUnit, gender) => {
         PatientService.addPatient(id, name, birthDate, animalSpecie, breed, serialNumber, dateImplemented, amount, baseUnit, gender)
+            .then( () => {
+                history.push(`/owner/${id}`)
+            })
     }
-    
+
     const [formData, updateFormData] = React.useState({
         name: "",
         birthDate: "",
@@ -72,7 +75,6 @@ const PatientAdd = () => {
         const gender = formData.gender;
 
         addPatient(id, name, birthDate, animalSpecie, breed, serialNumber, dateImplemented, amount, baseUnit, gender);
-        navigate(`/owner/${id}`);
     }
 
     return (

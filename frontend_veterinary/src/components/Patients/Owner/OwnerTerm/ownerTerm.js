@@ -22,10 +22,10 @@ const OwnerTerm = (props) => {
                 </div>
             </td>
             <td className={"text-right"}>
-                <Link title={"View"} className={"btn btn-success m-2"}  to={`/owner/${props.term.id.id}`} >View Owner</Link>
-                <Link title={"Add Patient"} className={"btn btn-success m-2"} to={`/owner/${props.term.id.id}/patient/add`}>Add patient</Link>
+                <a title={"View"} className={"btn btn-success m-2"}  href={`/owner/${props.term.id.id}`} >View Owner</a>
+                <a title={"Add Patient"} className={"btn btn-success m-2"} href={`/owner/${props.term.id.id}/patient/add`}>Add patient</a>
                 <a title={"Delete"} className={"btn btn-success m-2"} onClick={() => props.onDelete(props.term.id.id)}>Delete Owner</a>
-                <Link title={"Edit"} className={"btn btn-success m-2"} to={`/owner/edit/${props.term.id.id}`}>Edit Owner</Link>
+                <a title={"Edit"} className={"btn btn-success m-2"} href={`/owner/edit/${props.term.id.id}`}>Edit Owner</a>
             </td>
         </tr>
     )

@@ -1,14 +1,14 @@
 import React from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Header = () => {
 
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const logout = (e) =>{
         localStorage.removeItem("JWT");
-        navigate('/login');
+        history.push(`/login`)
         window.location.reload(false);
     }
 
@@ -17,13 +17,13 @@ const Header = () => {
         authenticate = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    <Link className="nav-link" to={"/veterinary"}>Veterinary</Link>
+                    <a className="nav-link" href={"/veterinary"}>Veterinary</a>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={"/appointments"}>Appointments</Link>
+                    <a className="nav-link" href={"/appointments"}>Appointments</a>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={"/home"}>Patients</Link>
+                    <a className="nav-link" href={"/home"}>Patients</a>
                 </li>
                 <li className="nav-item">
                     <button className={"btn btn-outline-info my-2 my-sm-0 me-0 "} onClick={logout}>Logout</button>
@@ -36,7 +36,7 @@ const Header = () => {
 
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    <button className={"btn btn-outline-info my-2 my-sm-0"} to={"/login"}>Login</button>
+                    <a className={"btn btn-outline-info my-2 my-sm-0"} href={"/login"}>Login</a>
                 </li>
             </ul>
         );

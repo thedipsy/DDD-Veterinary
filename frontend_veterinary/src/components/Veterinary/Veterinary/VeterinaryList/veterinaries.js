@@ -3,7 +3,7 @@ import VeterinaryTerm from '../VeterinaryTerm/veterinaryTerm';
 import {Link} from "react-router-dom";
 import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
-const Veterinary = () => {
+const Veterinaries = () => {
 
     const [veterinaries, setVeterinaries] = useState([])
 
@@ -31,9 +31,9 @@ const Veterinary = () => {
 
                 <div className="row mb-5">
                     <div className="col-sm-12 col-md-12">
-                        <Link to="/veterinary/add" className="btn btn-block btn-dark add-product-btn">
+                        <a href={"/veterinary/add"} className="btn btn-block btn-dark add-product-btn">
                             Add a new veterinary
-                        </Link>
+                        </a>
                     </div>
                 </div>
 
@@ -55,4 +55,4 @@ const Veterinary = () => {
     )
 }
 
-export default Veterinary;
+export default Veterinaries;

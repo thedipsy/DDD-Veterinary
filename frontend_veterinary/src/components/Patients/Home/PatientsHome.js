@@ -17,10 +17,10 @@ const PatientsHome = () => {
                         <tr className="inner-box">
                             <td>
                                 <div className="event-wrap">
-                                    <h1 className={"text-center m-3 mb-5"}><b><Link title={"Owners"} className={"link-class-3"} to={`/owners`}>Owners</Link></b></h1>
+                                    <h1 className={"text-center m-3 mb-5"}><b><a title={"Owners"} className={"link-class-3"} href={`/owners`}>Owners</a></b></h1>
                                     <hr/>
                                     <br/>
-                                    <h1 className={"text-center m-3"}><b><Link title={"Patients"} className={"link-class-3"} to={`/patients`}>Patients</Link></b></h1>
+                                    <h1 className={"text-center m-3"}><b><a title={"Patients"} className={"link-class-3"} href={`/patients`}>Patients</a></b></h1>
                                 </div>
                             </td>
                         </tr>

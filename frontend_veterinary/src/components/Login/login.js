@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import LoginService from "../../repository/repositoryLogin";
 
 const Login = () => {
 
-    const navigate = useNavigate(); //da moze da redirektirame na nova pateka
+    const history = useHistory();
 
     const [formData, updateFormData] = React.useState({
         email : "",
@@ -33,7 +33,8 @@ const Login = () => {
     const login = (email, password) => {
         LoginService.login(email, password).then(resp => {
             localStorage.setItem("JWT", resp.data);
-            navigate('/veterinary');
+            //navigate('/veterinary');
+            history.push(`/veterinary`)
             window.location.reload(false);
         })
     }

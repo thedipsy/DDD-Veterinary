@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import PatientService from "../../../../repository/repositoryPatinet";
+import {useHistory} from "react-router-dom";
+import PatientService from "../../../../repository/repositoryPatient";
 
 const OwnerAdd = () => {
 
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const [formData, updateFormData] = useState({
         name : "",
@@ -19,6 +19,9 @@ const OwnerAdd = () => {
 
     const addOwner = (name, surname, email, phone, streetName, houseNumber, city, postalCode) => {
         PatientService.addOwner(name, surname, email, phone, streetName, houseNumber, city, postalCode)
+            .then( () => {
+                history.push(`/owners`)
+            })
     }
 
     useEffect(() => {
@@ -46,7 +49,7 @@ const OwnerAdd = () => {
         const postalCode = formData.postalCode;
 
         addOwner(name, surname, email, phone, streetName, houseNumber, city, postalCode);
-        navigate(`/owners`); //overview na owners
+
     }
 
     return (

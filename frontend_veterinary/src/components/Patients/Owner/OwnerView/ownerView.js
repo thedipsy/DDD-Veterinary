@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import PatientService from "../../../../repository/repositoryPatinet";
+import PatientService from "../../../../repository/repositoryPatient";
 import {Link, useParams} from "react-router-dom";
-import OwnerTerm from "../OwnerTerm/ownerTerm";
 import PatientTerm from "../../Patient/PatientTerm/patientTerm";
 
 const OwnerView = () => {
@@ -47,9 +46,9 @@ const OwnerView = () => {
 
                 <div className="row mb-5">
                     <div className="col-sm-12 col-md-12">
-                        <Link to={`/owner/${id}/patient/add`} className="btn btn-block btn-dark add-product-btn">
+                        <a href={`/owner/${id}/patient/add`} className="btn btn-block btn-dark add-product-btn">
                             Add a patient
-                        </Link>
+                        </a>
                     </div>
                 </div>
 
@@ -77,7 +76,7 @@ const OwnerView = () => {
                                 </td>
                                 <td className={"text-right"}>
                                     <a title={"Delete"} className={"btn btn-success m-2"} onClick={() => deleteOwner(id)}>Delete Owner</a>
-                                    <Link title={"Edit"} className={"btn btn-success m-2"} to={`/owner/edit/${id}`}>Edit Owner</Link>
+                                    <a title={"Edit"} className={"btn btn-success m-2"} href={`/owner/edit/${id}`}>Edit Owner</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -95,7 +94,7 @@ const OwnerView = () => {
                                     </tr> :
                                     owner.animalsList.map((term, index) => {
                                         return (
-                                            <PatientTerm term={term} num={index} onDelete={deleteOwner}/>
+                                            <PatientTerm term={term} ownerId={id} num={index} onDelete={deleteOwner}/>
                                         )
                                     })
                                 }

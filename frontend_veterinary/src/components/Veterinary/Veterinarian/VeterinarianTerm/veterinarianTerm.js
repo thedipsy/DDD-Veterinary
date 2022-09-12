@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const veterinarianTerm = (props) => {
 
@@ -23,7 +23,7 @@ const veterinarianTerm = (props) => {
             </td>
             <td className={"text-right"}>
                 <a title={"Delete"} className={"btn btn-success m-2"} onClick={() => props.onDeleteVeterinarian(props.term.id.id)}>Delete Veterinarian</a>
-                <Link title={"Edit"} className={"btn btn-success m-2"} to={`/veterinary/${props.id}/veterinarian/edit/${props.term.id.id}`}>Edit Veterinarian</Link>
+                <a title={"Edit"} className={"btn btn-success m-2"} href={`/veterinary/${props.id}/veterinarian/edit/${props.term.id.id}`}>Edit Veterinarian</a>
             </td>
         </tr>
     )

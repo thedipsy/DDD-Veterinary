@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
-const VeterinaryAdd = (props) => {
+const VeterinaryAdd = () => {
 
-    const navigate = useNavigate(); //da moze da redirektirame na nova pateka
+    const history = useHistory();
 
     const [formData, updateFormData] = useState({
         name : "",
@@ -27,7 +27,7 @@ const VeterinaryAdd = (props) => {
     }
 
     const onFormSubmit = (e) => {
-        e.preventDefault(); //ne gi prakjaj vednas podatocite kako post request tuku napravi go slednoto podolu
+        e.preventDefault();
 
         const name = formData.name;
         const streetName = formData.streetName;
@@ -36,7 +36,9 @@ const VeterinaryAdd = (props) => {
         const postalCode = formData.postalCode;
 
         addVeterinary(name, streetName, houseNumber, city, postalCode);
-        navigate('/veterinary'); //vrati me na veterinary
+
+        history.push(`/veterinary`)
+
     }
 
     useEffect(() => {

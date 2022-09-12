@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
 const VeterinaryEdit = () => {
 
-    const navigate = useNavigate(); //da moze da redirektirame na nova pateka
+    const history = useHistory();
     const id = useParams().id;
 
     const [veterinary, setVeterinary] = useState({
@@ -34,8 +34,8 @@ const VeterinaryEdit = () => {
 
     const editVeterinary = (id, name, streetName, houseNumber, city, postalCode) => {
         VeterinaryService.editVeterinary(id, name, streetName, houseNumber, city, postalCode)
-            .then(() => {
-                this.loadVeterinaries();
+            .then( () => {
+                history.push(`/veterinary`)
             })
     }
 
@@ -56,7 +56,7 @@ const VeterinaryEdit = () => {
         const postalCode = formData.postalCode !== "" ? formData.postalCode : veterinary.address.postalCode;
 
         editVeterinary(id, name, streetName, houseNumber, city, postalCode);
-        navigate('/veterinary'); //vrati me na veterinary
+
     }
 
     return (

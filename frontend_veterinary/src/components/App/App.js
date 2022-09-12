@@ -1,11 +1,11 @@
 import './App.css';
 import React, {Component} from "react";
-import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 import Header from '../Header/header';
 import Login from '../Login/login';
 
-import PatientService from "../../repository/repositoryPatinet";
+import PatientService from "../../repository/repositoryPatient";
 import AppointmentService from "../../repository/repositoryAppointment";
 
 import VeterinaryAdd from "../Veterinary/Veterinary/VeterinaryAdd/veterinaryAdd";
@@ -20,8 +20,6 @@ import Owners from "../Patients/Owner/OwnerList/owners";
 
 import PatientAdd from "../Patients/Patient/PatientAdd/patientAdd";
 import PatientEdit from "../Patients/Patient/PatientEdit/patientEdit";
-import Patients from "../Patients/Patient/PatientList/patients";
-import AppointmentAdd from "../Appointment/AppointmentAdd/appointmentAdd";
 import VeterinarianEdit from "../Veterinary/Veterinarian/VeterinarianEdit/VeterinarianEdit";
 import PatientsHome from "../Patients/Home/PatientsHome";
 import OwnerView from "../Patients/Owner/OwnerView/ownerView";
@@ -46,91 +44,61 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Header onLogout={this.onLogout}/>
+                <Header/>
 
                 <main>
                     <div className="container">
 
-                        <Routes>
-                            {/*login form start*/}
-                            <Route path={"/login"}
-                                   element={<Login onLogin={this.login}/>}/>
-                            {/*login form end*/}
+                        {/*login form start*/}
 
-                            {/*veterinary region start*/}
-                            <Route path={"/veterinary"}
-                                   element={<Veterinaries/>}/>
+                        <Route path={"/login"} exact render={() =>
+                              <Login/>}/>
+                        {/*login form end*/}
 
-                            <Route path={"/veterinary/add"}
-                                   element={<VeterinaryAdd/>}/>
+                        {/*veterinary region start*/}
+                        <Route path={"/veterinary"} exact render={() =>
+                            <Veterinaries/>}/>
 
-                            <Route path={"/veterinary/:id"}
-                                   element={<VeterinaryView/>}/>
+                        <Route path={"/veterinary/add"} exact render={() =>
+                            <VeterinaryAdd/>}/>
 
-                            <Route path={"/veterinary/edit/:id"}
-                                   element={<VeterinaryEdit/>}/>
+                        <Route path={"/veterinary/:id"} exact render={() =>
+                            <VeterinaryView/>}/>
 
-                            <Route path={"/veterinary/:id/veterinarian"}
-                                   element={<VeterinarianAdd/>}/>
+                        <Route path={"/veterinary/edit/:id"} exact render={() =>
+                            <VeterinaryEdit/>}/>
 
-                            <Route path={"/veterinary/:id/veterinarian/edit/:veterinarianId"}
-                                   element={<VeterinarianEdit/>}/>
-                            {/*veterinary region end*/}
+                        <Route path={"/veterinary/:id/veterinarian"} exact render={() =>
+                            <VeterinarianAdd/>}/>
 
-                            {/*patients region start*/}
-                            <Route path={"/home"}
-                                   element={<PatientsHome/>}/>
+                        <Route path={"/veterinary/:id/veterinarian/edit/:veterinarianId"} exact render={() =>
+                            <VeterinarianEdit/>}/>
+                        {/*veterinary region end*/}
 
-                            <Route path={"/owners"}
-                                   element={<Owners />}/>
+                        {/*patients region start*/}
+                        <Route path={"/home"} exact render={() =>
+                            <PatientsHome/>}/>
 
-                            <Route path={"/owners/add"}
-                                   element={<OwnerAdd />}/>
+                        <Route path={"/owners"} exact render={() =>
+                            <Owners />}/>
 
-                            <Route path={"/owner/:id"}
-                                   element={<OwnerView/>}/>
+                        <Route path={"/owners/add"} exact render={() =>
+                            <OwnerAdd />}/>
 
-                            <Route path={"/owner/edit/:id"}
-                                   element={<OwnerEdit/>}/>
+                        <Route path={"/owner/:id"} exact render={() =>
+                            <OwnerView/>}/>
 
-                            <Route path={"/owner/:id/patient/add"}
-                                   element={<PatientAdd/>}/>
+                        <Route path={"/owner/edit/:id"} exact render={() =>
+                            <OwnerEdit/>}/>
 
+                        <Route path={"/owner/:id/patient/add"} exact render={() =>
+                            <PatientAdd/>}/>
 
-                            {/*patients region end*/}
-
-
-                            <Route path={"/patients"}
-                                   element={<Patients patients={this.state.patients}
-                                                      onDelete={this.deletePatient}
-                                                      onEdit={this.editPatient}/>}/>
+                        <Route path={"/owner/:id/patient/edit/:patientId"} exact render={() =>
+                            <PatientEdit/>}/>
+                        {/*patients region end*/}
 
 
-
-                            <Route path={"/patients/edit/:id"}
-                                   element={<PatientEdit patient={this.state.selectedPatient}
-                                                         onEditPatient={this.editPatient}/>}/>
-
-
-
-                            {/*appointment region start*/}
-                            {/*<Route path={"/appointment"}*/}
-                            {/*       element={<Appoint patients={this.state.patients}*/}
-                            {/*                          onDelete={this.deletePatient}*/}
-                            {/*                          onEdit={this.editPatient}/>}/>*/}
-
-                            <Route path={"/appointment/book"}
-                                   element={<AppointmentAdd onBookAppointment={this.bookAppointment}/>}/>
-
-                            {/*<Route path={"/patients/edit/:id"}*/}
-                            {/*       element={<PatientEdit patient={this.state.selectedPatient}*/}
-                            {/*                             onEditPatient={this.editPatient}/>}/>*/}
-                            {/*appointment region end*/}
-
-
-                            <Route path="/" element={<Navigate replace to="/home"/>}/>
-
-                        </Routes>
                     </div>
                 </main>
 

@@ -1,10 +1,10 @@
-import {useNavigate} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const AppointmentAdd = (props) => {
 
-    const navigate = useNavigate(); //da moze da redirektirame na nova pateka
+    const history = useHistory();
     const [formData, updateFormData] = React.useState({
         name: "",
     });
@@ -22,7 +22,8 @@ const AppointmentAdd = (props) => {
 
         const name = formData.name;
 
-        navigate('/appointents'); //vrati me na veterinary
+        //navigate('/appointents'); //vrati me na veterinary
+        history.push(`/appointents`)
     }
 
     return (

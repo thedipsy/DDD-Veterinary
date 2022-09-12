@@ -9,9 +9,9 @@ const patients = (props) => {
 
                 <div className="row mb-5">
                     <div className="col-sm-12 col-md-12">
-                        <Link to="/patients/add" className="btn btn-block btn-dark add-product-btn">
+                        <a href="/patients/add" className="btn btn-block btn-dark add-product-btn">
                             Add new patient
-                        </Link>
+                        </a>
                     </div>
                 </div>
 

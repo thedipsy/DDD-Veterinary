@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import PatientService from "../../../../repository/repositoryPatinet";
+import PatientService from "../../../../repository/repositoryPatient";
 import OwnerTerm from "../OwnerTerm/ownerTerm";
 
 const Owners = () => {
@@ -31,9 +31,9 @@ const Owners = () => {
 
                 <div className="row mb-5">
                     <div className="col-sm-12 col-md-12">
-                        <Link to="/owners/add" className="btn btn-block btn-dark add-product-btn">
+                        <a href="/owners/add" className="btn btn-block btn-dark add-product-btn">
                             Add a new owner
-                        </Link>
+                        </a>
                     </div>
                 </div>
 

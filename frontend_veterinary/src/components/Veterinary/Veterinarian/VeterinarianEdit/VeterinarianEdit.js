@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
-const VeterinarianEdit = (props) => {
+const VeterinarianEdit = () => {
 
-    const navigate = useNavigate(); //da moze da redirektirame na nova pateka
+    const history = useHistory();
     const id = useParams().id;
     const veterinarianId = useParams().veterinarianId;
 
@@ -40,6 +40,9 @@ const VeterinarianEdit = (props) => {
 
     const editVeterinarian = (id, veterinarianId, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment) => {
         VeterinaryService.editVeterinarian(id, veterinarianId, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment)
+            .then( () =>
+                history.push(`/veterinary/${id}`)
+            )
     }
 
     useEffect(() => {
@@ -55,7 +58,7 @@ const VeterinarianEdit = (props) => {
     };
 
     const onFormSubmit = (e) => {
-        e.preventDefault(); //ne gi prakjaj vednas podatocite kako post request tuku napravi go slednoto podolu
+        e.preventDefault();
 
         const name = formData.name !== "" ? formData.name : veterinarian.name;
         const surname = formData.surname !== "" ? formData.surname : veterinarian.surname;
@@ -68,7 +71,6 @@ const VeterinarianEdit = (props) => {
         const dateOfEmployment = formData.dateOfEmployment !== "" ? formData.dateOfEmployment : veterinarian.dateOfEmployment;
 
         editVeterinarian(id, veterinarian.id.id, name, surname, email, phone, streetName, houseNumber, city, postalCode, dateOfEmployment);
-        navigate(`/veterinary/${id}`); //overview na veterinarians vo veterinary
     }
 
     return (

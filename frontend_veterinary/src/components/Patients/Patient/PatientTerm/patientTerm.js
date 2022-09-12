@@ -12,7 +12,7 @@ const PatientTerm = (props) => {
             </th>
             <td>
                 <div className="event-wrap">
-                    <h3><b><Link title={"Patient"} className={"link-class"} to={`/patients/${props.term.id.id}`}>{props.term.name}</Link></b></h3>
+                    <h3><b><a title={"Patient"} className={"link-class"} href={`/patients/${props.term.id.id}`}>{props.term.name}</a></b></h3>
                     <div className="meta">
                         <div className="time">
                             <span><b>{props.term.gender} | {props.term.animalSpecie} | {props.term.breed}</b></span>
@@ -21,9 +21,9 @@ const PatientTerm = (props) => {
                 </div>
             </td>
             <td className={"text-right"}>
-                <Link title={"Edit"} className={"btn btn-outline-primary m-2"} to={`/patients/edit/${props.term.id.id}`}
+                <a title={"Edit"} className={"btn btn-outline-primary m-2"} href={`/owner/${props.ownerId}/patient/edit/${props.term.id.id}`}
                       onClick={() => props.onEdit(props.term.id.id)}>Edit
-                </Link>
+                </a>
                 <a title={"Delete"} className={"btn btn-outline-danger m-2"}
                    onClick={() => props.onDelete(props.term.id.id)}>Delete
                 </a>

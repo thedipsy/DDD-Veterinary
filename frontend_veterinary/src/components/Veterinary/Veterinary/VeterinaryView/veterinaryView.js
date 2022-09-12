@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import VeterinarianTerm from "../../Veterinarian/VeterinarianTerm/veterinarianTerm";
 import VeterinaryService from "../../../../repository/repositoryVeterinary";
 
@@ -54,9 +54,9 @@ const VeterinaryView = () => {
                             <h1 className="mt-2 mb-3 link-class">
                                 {veterinary.name}
                             </h1>
-                            <Link to={`/veterinary/${id}/veterinarian`} className="btn btn-block btn-dark add-product-btn">Add a veterinarian</Link>
-                            <Link title={"Edit"} className={"btn btn-outline-success m-2"} to={`/veterinary/edit/${id}`}>Edit Veterinary</Link>
-                            <Link title={"Delete"} className={"btn btn-outline-danger m-2"} to={"/veterinary"} onClick={() => deleteVeterinary(id)}>Delete Veterinary</Link>
+                            <a href={`/veterinary/${id}/veterinarian`} className="btn btn-block btn-dark add-product-btn">Add a veterinarian</a>
+                            <a title={"Edit"} className={"btn btn-outline-success m-2"} href={`/veterinary/edit/${id}`}>Edit Veterinary</a>
+                            <a title={"Delete"} className={"btn btn-outline-danger m-2"} href={"/veterinary"} onClick={() => deleteVeterinary(id)}>Delete Veterinary</a>
 
                         </div>
                     </div>

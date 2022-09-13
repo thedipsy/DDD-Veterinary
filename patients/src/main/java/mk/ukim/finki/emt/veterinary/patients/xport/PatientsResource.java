@@ -12,6 +12,7 @@ import mk.ukim.finki.emt.veterinary.patients.services.forms.AnimalForm;
 import mk.ukim.finki.emt.veterinary.patients.services.forms.OwnerForm;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -57,6 +58,18 @@ public class PatientsResource {
         OwnerId ownerId = new OwnerId(id);
         ownerService.addAnimal(ownerId, animalForm);
     }
+
+    @GetMapping("/patients")
+    public List<Animal> getPatients(){
+        List<Owner> owners = ownerService.findAll();
+        List<Animal> patients = new ArrayList<>();
+        for(Owner owner : owners){
+            patients.addAll(owner.getAnimalsList());
+        }
+
+       return patients;
+    }
+
 
     @GetMapping("/{id}/patient/{patientId}")
     public Animal getAnimal(@PathVariable String id,

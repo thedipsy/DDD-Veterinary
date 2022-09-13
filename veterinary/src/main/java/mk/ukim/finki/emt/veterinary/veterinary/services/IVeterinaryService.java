@@ -26,4 +26,6 @@ public interface IVeterinaryService extends UserDetailsService {
     VeterinaryId editVeterinary(VeterinaryId veterinaryId, VeterinaryForm veterinaryForm) throws  VeterinaryNotExistsException;
 
     void editVeterinarian(VeterinaryId veterinaryId, VeterinarianId veterinarianId1, VeterinarianForm veterinarianForm);
+
+    Veterinarian findVeterinarianById(VeterinarianId veterinarianId1);
 }

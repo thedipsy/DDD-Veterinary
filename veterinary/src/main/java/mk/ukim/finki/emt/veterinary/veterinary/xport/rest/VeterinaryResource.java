@@ -3,6 +3,7 @@ package mk.ukim.finki.emt.veterinary.veterinary.xport.rest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import mk.ukim.finki.emt.veterinary.veterinary.Config.filters.JwtAuthenticationFilter;
+import mk.ukim.finki.emt.veterinary.veterinary.domain.models.JwtResponse;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinarian;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinary;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.id.VeterinarianId;
@@ -70,6 +71,14 @@ public class VeterinaryResource {
         return veterinaryService.findVeterinarianById(veterinaryId, veterinarianId1);
     }
 
+
+
+    @GetMapping("/veterinarian/{veterinarianId}")
+    public Veterinarian getVeterinarianById(@PathVariable String veterinarianId){
+        VeterinarianId veterinarianId1 = new VeterinarianId(veterinarianId);
+        return veterinaryService.findVeterinarianById(veterinarianId1);
+    }
+
     @PostMapping("/{id}/veterinarian/add")
     public void addVeterinarian(@PathVariable String id,
                                @RequestBody VeterinarianForm veterinarianForm){
@@ -97,11 +106,10 @@ public class VeterinaryResource {
 
 
     @PostMapping("/login")
-    public String doLogin(HttpServletRequest request,
-                          HttpServletResponse response) throws JsonProcessingException {
+    public JwtResponse doLogin(HttpServletRequest request,
+                               HttpServletResponse response) throws JsonProcessingException {
         Authentication auth = this.filter.attemptAuthentication(request, response);
         return this.filter.generateJwt(response, auth);
-
     }
 
 }

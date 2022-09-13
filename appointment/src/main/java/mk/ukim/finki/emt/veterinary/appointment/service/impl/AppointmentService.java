@@ -73,7 +73,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     private Appointment toDomainObject(AppointmentForm appointmentForm){
-        var appointment = new Appointment(appointmentForm.getDate(), appointmentForm.getPatient().getId(), appointmentForm.getVeterinarian().getId());
+        var appointment = new Appointment(appointmentForm.getDate(), appointmentForm.getPatientId(), appointmentForm.getVeterinarianId());
         appointmentForm.getTreatmentList()
                 .forEach(treatment -> appointment.addTreatment(
                         treatment.getTreatmentType(),

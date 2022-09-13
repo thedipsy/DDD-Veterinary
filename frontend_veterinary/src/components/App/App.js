@@ -22,7 +22,10 @@ import PatientAdd from "../Patients/Patient/PatientAdd/patientAdd";
 import PatientEdit from "../Patients/Patient/PatientEdit/patientEdit";
 import VeterinarianEdit from "../Veterinary/Veterinarian/VeterinarianEdit/VeterinarianEdit";
 import PatientsHome from "../Patients/Home/PatientsHome";
+import Patients from "../Patients/Patient/PatientList/patients";
 import OwnerView from "../Patients/Owner/OwnerView/ownerView";
+import AppointmentAdd from "../Appointment/AppointmentAdd/appointmentAdd";
+import Appointments from "../Appointment/AppointmentList/appointments";
 
 class App extends Component {
 
@@ -96,8 +99,20 @@ class App extends Component {
 
                         <Route path={"/owner/:id/patient/edit/:patientId"} exact render={() =>
                             <PatientEdit/>}/>
+
+                        <Route path={"/patients"} exact render={() =>
+                            <Patients/>}/>
                         {/*patients region end*/}
 
+                        {/*appointment region start*/}
+                        <Route path={"/appointments"} exact render={() =>
+                            <Appointments/>}/>
+
+                        <Route path={"/appointments/add"} exact render={() =>
+                            <AppointmentAdd/>}/>
+
+
+                        {/*appointment region end*/}
 
                     </div>
                 </main>

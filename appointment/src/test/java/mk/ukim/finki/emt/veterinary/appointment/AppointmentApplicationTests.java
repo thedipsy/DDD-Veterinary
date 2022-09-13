@@ -43,29 +43,7 @@ class AppointmentApplicationTests {
 
     @Test
     public void testBuildOwner(){
-        AppointmentForm appointmentForm = new AppointmentForm();
-        appointmentForm.setDate(new Date());
-        appointmentForm.setPatient(newPatient(
-                "Mande",
-                new Date(),
-                AnimalSpecie.CAT,
-                "Angor",
-                new Microchip(),
-                new Weight(),
-                Gender.FEMALE
-        ));
-        appointmentForm.setVeterinarian(newVeterinarian(
-                "Bojan",
-                "Taleski",
-                "bojankiko5@gmail.com",
-                "38975708272",
-                Address.build("9ti maj", "36", "Skopje", "7500"),
-                new Date()
-        ));
 
-        AppointmentId appointmentId = appointmentService.saveAppointment(appointmentForm);
-        Appointment appointment = appointmentService.findById(appointmentId).orElseThrow(AppointmentIdNotExistsException::new);
-        System.out.println("succeeded");
     }
 
     @Test

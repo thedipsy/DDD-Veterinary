@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import mk.ukim.finki.emt.veterinary.veterinary.Config.JwtAuthConstants;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.dto.UserDetailsDto;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.exceptions.PasswordsDoNotMatchException;
+import mk.ukim.finki.emt.veterinary.veterinary.domain.models.JwtResponse;
 import mk.ukim.finki.emt.veterinary.veterinary.domain.models.Veterinarian;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -75,14 +76,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         super.successfulAuthentication(request, response, chain, authResult);
     }
 
-    public String generateJwt(HttpServletResponse response, Authentication authResult) throws JsonProcessingException {
+    public JwtResponse generateJwt(HttpServletResponse response, Authentication authResult) throws JsonProcessingException {
         Veterinarian userDetails = (Veterinarian) authResult.getPrincipal();
         String token = JWT.create()
                 .withSubject(new ObjectMapper().writeValueAsString(UserDetailsDto.of(userDetails)))
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtAuthConstants.EXPIRATION_TIME))
                 .sign(Algorithm.HMAC256(JwtAuthConstants.SECRET.getBytes()));
         response.addHeader(JwtAuthConstants.HEADER_STRING, JwtAuthConstants.TOKEN_PREFIX + token);
-        return JwtAuthConstants.TOKEN_PREFIX + token;
+        return new JwtResponse(
+                userDetails.getId().getId(),
+                JwtAuthConstants.TOKEN_PREFIX + token,
+                userDetails.getRole()
+                );
     }
 }
 

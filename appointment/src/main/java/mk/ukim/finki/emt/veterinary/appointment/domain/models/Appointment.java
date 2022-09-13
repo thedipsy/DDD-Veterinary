@@ -1,5 +1,6 @@
 package mk.ukim.finki.emt.veterinary.appointment.domain.models;
 
+import lombok.Getter;
 import mk.ukim.finki.emt.veterinary.appointment.domain.enumeration.AppointmentStatus;
 import mk.ukim.finki.emt.veterinary.appointment.domain.enumeration.TreatmentType;
 import mk.ukim.finki.emt.veterinary.appointment.domain.models.id.AppointmentId;
@@ -13,7 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="treatment")
+@Table(name="appointment")
+@Getter
 public class Appointment extends AbstractEntity<AppointmentId> {
 
     @Column(nullable = false)
@@ -28,7 +30,7 @@ public class Appointment extends AbstractEntity<AppointmentId> {
     private PatientId patientId;
 
     @AttributeOverrides({
-            @AttributeOverride(name="id", column = @Column(name="patientId", nullable = false))
+            @AttributeOverride(name="id", column = @Column(name="veterinarianId", nullable = false))
     })
     private VeterinarianId veterinarianId;
 

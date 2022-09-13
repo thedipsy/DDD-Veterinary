@@ -11,8 +11,12 @@ const AppointmentService = {
         return axios.get(`/owner/${id}`);
     },
 
-    bookAppointment: () => {
-        return axios.post("/appointment/book")
+    bookAppointment: (patientId, veterinarianId, date) => {
+        return axios.post("/appointment", {
+            "patientId" : patientId,
+            "veterinarianId" : veterinarianId,
+            "date" : date
+        })
     },
 
     deleteAppointment: (id) => {

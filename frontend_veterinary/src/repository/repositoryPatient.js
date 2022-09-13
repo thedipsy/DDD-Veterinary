@@ -57,6 +57,10 @@ const PatientService = {
         return axios.get(`owner/patients/weightUnits`);
     },
 
+    getPatients: () => {
+        return axios.get(`owner/patients`);
+    },
+
     getPatient: (id, patientId) => {
         return axios.get(`owner/${id}/patient/${patientId}`);
     },

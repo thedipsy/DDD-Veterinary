@@ -85,8 +85,13 @@ const VeterinaryService = {
             },
             "dateOfEmployment" : dateOfEmployment
         });
+    },
+
+    getVeterinarianById: (veterinarianId) => {
+        return axios.get(`veterinary/veterinarian/${veterinarianId}`);
     }
     //end veterinarian region
+
 }
 
 export default VeterinaryService;

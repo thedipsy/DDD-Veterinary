@@ -32,8 +32,9 @@ const Login = () => {
 
     const login = (email, password) => {
         LoginService.login(email, password).then(resp => {
-            localStorage.setItem("JWT", resp.data);
-            //navigate('/veterinary');
+            localStorage.setItem("JWT", resp.data.jwtToken);
+            localStorage.setItem("ID", resp.data.veterinarianId);
+            localStorage.setItem("Role", resp.data.role);
             history.push(`/veterinary`)
             window.location.reload(false);
         })

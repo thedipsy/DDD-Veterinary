@@ -127,6 +127,19 @@ public class VeterinaryService implements IVeterinaryService {
     }
 
     @Override
+    public Veterinarian findVeterinarianById(VeterinarianId veterinarianId1) {
+        List<Veterinary> veterinaryList = findAll();
+        for(Veterinary veterinary: veterinaryList){
+            for(Veterinarian veterinarian: veterinary.getVeterinarians()){
+                if(veterinarian.getId().equals(veterinarianId1)){
+                    return veterinarian;
+                }
+            }
+        }
+        throw new VeterinarianNotExistsException();
+    }
+
+    @Override
     public Veterinarian findVeterinarianById(VeterinaryId veterinaryId, VeterinarianId veterinarianId) {
         Veterinary veterinary = findById(veterinaryId);
         return veterinary.getVeterinarian(veterinarianId).orElseThrow(VeterinarianNotExistsException::new);

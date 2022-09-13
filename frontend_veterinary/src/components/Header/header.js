@@ -11,10 +11,26 @@ const Header = () => {
         history.push(`/login`)
         window.location.reload(false);
     }
+console.log(localStorage.getItem("ID"))
 
-    let authenticate
-    if (localStorage.getItem("JWT")) {
-        authenticate = (
+    let authenticated
+    if (localStorage.getItem("JWT") && localStorage.getItem("Role") === "ROLE_USER") {
+        authenticated = (
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item roboto-font">
+                    <a className="nav-link" href={"/appointments"}>Appointments</a>
+                </li>
+                <li className="nav-item roboto-font">
+                    <a className="nav-link" href={"/home"}>Patients</a>
+                </li>
+                <li className="nav-item roboto-font">
+                    <button className={"btn btn-outline-info my-2 my-sm-0 me-0 "} onClick={logout}>Logout</button>
+                </li>
+            </ul>
+        );
+    }
+    else if (localStorage.getItem("JWT") && localStorage.getItem("Role") === "ROLE_ADMIN") {
+        authenticated = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item roboto-font">
                     <a className="nav-link" href={"/veterinary"}>Veterinary</a>
@@ -32,7 +48,7 @@ const Header = () => {
         );
     }
     else {
-        authenticate = (
+        authenticated = (
 
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item roboto-font">
@@ -47,7 +63,7 @@ const Header = () => {
             <div className="container">
                 <a className={"navbar-brand roboto-font"}>Veterinary System</a>
 
-                {authenticate}
+                {authenticated}
 
             </div>
         </nav>

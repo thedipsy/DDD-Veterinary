@@ -138,7 +138,7 @@ const OwnerEdit = () => {
                     </div>
                 </div>
 
-                <div className="row mb-3">
+                <div className="row mb-3 mt-4">
                     <div className="col">
                         <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>

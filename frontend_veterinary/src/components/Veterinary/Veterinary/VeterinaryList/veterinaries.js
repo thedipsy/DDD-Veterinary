@@ -30,7 +30,7 @@ const Veterinaries = () => {
             <div className={"container mm-4 mt-5"}>
 
                 <div className="row mb-5">
-                    <div className="col-sm-12 col-md-12">
+                    <div className="col-sm-12 col-md-12 roboto-font">
                         <a href={"/veterinary/add"} className="btn btn-block btn-dark add-product-btn">
                             Add a new veterinary
                         </a>
@@ -41,6 +41,12 @@ const Veterinaries = () => {
                 <div className={"row"}>
                     <div className={"row"}>
                         <table className={"table table-striped"}>
+                            <thead>
+                            <tr>
+                                <th scope="col" className={"roboto-font"}>Veterinaries</th>
+                                <th scope="col"/>
+                            </tr>
+                            </thead>
                             <tbody>
                                 {veterinaries.map((term) => {
                                     return (

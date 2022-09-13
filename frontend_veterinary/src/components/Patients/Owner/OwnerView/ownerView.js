@@ -56,6 +56,12 @@ const OwnerView = () => {
                 <div className={"row"}>
                     <div className={"row"}>
                         <table className={"table table-striped"}>
+                            <thead>
+                            <tr>
+                                <th scope="col" className={"roboto-font"}>Owner</th>
+                                <th scope="col"/>
+                            </tr>
+                            </thead>
                             <tbody>
                             <tr className="inner-box">
                                 <td>
@@ -75,8 +81,8 @@ const OwnerView = () => {
                                     </div>
                                 </td>
                                 <td className={"text-right"}>
-                                    <a title={"Delete"} className={"btn btn-success m-2"} onClick={() => deleteOwner(id)}>Delete Owner</a>
                                     <a title={"Edit"} className={"btn btn-success m-2"} href={`/owner/edit/${id}`}>Edit Owner</a>
+                                    <a title={"Delete"} className={"btn btn-success m-2"} onClick={() => deleteOwner(id)}>Delete Owner</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -87,10 +93,19 @@ const OwnerView = () => {
                 <div className={"row"}>
                     <div className={"row"}>
                         <table className={"table table-striped"}>
+                            <thead>
+                            <tr>
+                                <th scope="col" className={"roboto-font"}>Patients</th>
+                                <th scope="col"/>
+                                <th scope="col"/>
+                            </tr>
+                            </thead>
                             <tbody>
                                 {owner.animalsList.length === 0 ?
                                     <tr>
-                                        <h4 className={"m-3 text-black-50"}>No patients.</h4>
+                                        <td className={"m-3 text-black-50"}>No patients.</td>
+                                        <td/>
+                                        <td/>
                                     </tr> :
                                     owner.animalsList.map((term, index) => {
                                         return (
@@ -98,7 +113,6 @@ const OwnerView = () => {
                                         )
                                     })
                                 }
-
                             </tbody>
                         </table>
                     </div>

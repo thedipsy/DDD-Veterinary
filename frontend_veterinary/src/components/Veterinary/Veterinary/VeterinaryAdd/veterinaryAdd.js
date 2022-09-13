@@ -47,7 +47,7 @@ const VeterinaryAdd = () => {
     )
 
     return (
-        <div className="container w-50">
+        <div className="container w-50 roboto-font">
 
             <div className={"row mb-3 mt-5"}>
                 <h5 className="margin-bottom-md green-text mt-2 text-center">
@@ -59,7 +59,8 @@ const VeterinaryAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Vet Clinic Name"
+                        <label className={"ms-1"}>Name:</label>
+                        <input className="form-control"
                                name="name"
                                required
                                onChange={handleChange}/>
@@ -68,14 +69,16 @@ const VeterinaryAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Street Name"
+                        <label className={"ms-1"}>Street Name:</label>
+                        <input className="form-control"
                                name="streetName"
                                required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Building Number"
+                        <label className={"ms-1"}>Building Number:</label>
+                        <input className="form-control"
                                name="houseNumber"
                                required
                                onChange={handleChange}/>
@@ -84,21 +87,23 @@ const VeterinaryAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="City"
+                        <label className={"ms-1"}>City:</label>
+                        <input className="form-control"
                                name="city"
                                required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Postal Code"
+                        <label className={"ms-1"}>Postal Code:</label>
+                        <input className="form-control"
                                name="postalCode"
                                required
                                onChange={handleChange}/>
                     </div>
                 </div>
 
-                <div className="row mb-3">
+                <div className="row mb-3 mt-4">
                     <div className="col">
                         <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>

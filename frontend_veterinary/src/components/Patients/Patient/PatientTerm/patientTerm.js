@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 
 const PatientTerm = (props) => {
 
@@ -21,11 +20,11 @@ const PatientTerm = (props) => {
                 </div>
             </td>
             <td className={"text-right"}>
-                <a title={"Edit"} className={"btn btn-outline-primary m-2"} href={`/owner/${props.ownerId}/patient/edit/${props.term.id.id}`}
-                      onClick={() => props.onEdit(props.term.id.id)}>Edit
+                <a title={"Edit"} className={"btn btn-outline-success m-2"} href={`/owner/${props.ownerId}/patient/edit/${props.term.id.id}`}
+                      onClick={() => props.onEdit(props.term.id.id)}>Edit Patient
                 </a>
                 <a title={"Delete"} className={"btn btn-outline-danger m-2"}
-                   onClick={() => props.onDelete(props.term.id.id)}>Delete
+                   onClick={() => props.onDelete(props.term.id.id)}>Delete Patient
                 </a>
 
             </td>

@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 
 const veterinarianTerm = (props) => {
 
@@ -22,8 +21,8 @@ const veterinarianTerm = (props) => {
                 </div>
             </td>
             <td className={"text-right"}>
-                <a title={"Delete"} className={"btn btn-success m-2"} onClick={() => props.onDeleteVeterinarian(props.term.id.id)}>Delete Veterinarian</a>
-                <a title={"Edit"} className={"btn btn-success m-2"} href={`/veterinary/${props.id}/veterinarian/edit/${props.term.id.id}`}>Edit Veterinarian</a>
+                <a title={"Delete"} className={"btn roboto-font btn-success m-2 "} onClick={() => props.onDeleteVeterinarian(props.term.id.id)}>Delete Veterinarian</a>
+                <a title={"Edit"} className={"btn btn-success m-2 roboto-font"} href={`/veterinary/${props.id}/veterinarian/edit/${props.term.id.id}`}>Edit Veterinarian</a>
             </td>
         </tr>
     )

@@ -110,6 +110,7 @@ const PatientEdit = () => {
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>Name:</label>
                         <input className="form-control" placeholder={patient.name} name={"name"}
                                required
                                onChange={handleChange}/>
@@ -118,6 +119,7 @@ const PatientEdit = () => {
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>Animal Specie:</label>
                         <select className="form-control" placeholder={patient.animalSpecie} name={"animalSpecie"}
                                 required
                                 onChange={handleChange}>
@@ -130,6 +132,7 @@ const PatientEdit = () => {
                     </div>
 
                     <div className="col">
+                        <label className={"ms-1"}>Breed:</label>
                         <input className="form-control" placeholder={patient.breed} name={"breed"}
                                required
                                onChange={handleChange}/>
@@ -138,10 +141,12 @@ const PatientEdit = () => {
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>Microchip Serial Number:</label>
                         <input className="form-control" placeholder={patient.microchip.serialNumber} name={"serialNumber"}
                                onChange={handleChange}/>
                     </div>
                     <div className="col">
+                        <label className={"ms-1"}>Microchip Date Implemented:</label>
                         <input className="form-control" placeholder="Microchip Date Implemented" name={"dateImplemented"}
                                type={"date"}
                                onChange={handleChange}/>
@@ -152,12 +157,14 @@ const PatientEdit = () => {
                 <div className="row mb-3">
 
                     <div className="col">
+                        <label className={"ms-1"}>Weight:</label>
                         <input className="form-control" placeholder={patient.weight.amount} name={"amount"}
                                required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
+                        <label className={"ms-1"}>Weight Unit:</label>
                         <select className="form-control" placeholder={patient.weight.baseUnit} name={"baseUnit"}
                                 required value={patient.weight.baseUnit}
                                 onChange={handleChange}>
@@ -171,32 +178,36 @@ const PatientEdit = () => {
 
 
                     <div className={"col"}>
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="gender"
-                                   value="MALE"
-                                   required
-                                   onChange={handleChange}/>
-                            <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="gender"
-                                   value="FEMALE"
-                                   required
-                                   onChange={handleChange}/>
-                            <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
+                        <label className={"ms-1"}>Gender:</label>
+                        <div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="gender"
+                                       value="MALE"
+                                       required
+                                       onChange={handleChange}/>
+                                <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="gender"
+                                       value="FEMALE"
+                                       required
+                                       onChange={handleChange}/>
+                                <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>Date of Birth:</label>
                         <input className="form-control" placeholder={patient.birthDate} name={"birthDate"} type={"date"}
                                required
                                onChange={handleChange}/>
                     </div>
                 </div>
 
-                <div className="row mb-3">
+                <div className="row mb-3 mt-4">
                     <div className="col">
                         <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>

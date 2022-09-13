@@ -83,18 +83,20 @@ const VeterinarianAdd = () => {
                 </h5>
             </div>
 
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={onFormSubmit} className={"roboto-font"}>
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="First Name"
+                        <label className={"ms-1"}>Name:</label>
+                        <input className="form-control"
                                name="name"
                                required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Last Name"
+                        <label className={"ms-1"}>Surname:</label>
+                        <input className="form-control"
                                name="surname"
                                required
                                onChange={handleChange}/>
@@ -103,7 +105,8 @@ const VeterinarianAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Email Address"
+                        <label className={"ms-1"}>Email:</label>
+                        <input className="form-control"
                                name="email"
                                required
                                onChange={handleChange}/>
@@ -112,7 +115,8 @@ const VeterinarianAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Phone"
+                        <label className={"ms-1"}>Phone:</label>
+                        <input className="form-control"
                                name="phone"
                                required
                                onChange={handleChange}/>
@@ -122,14 +126,16 @@ const VeterinarianAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Street Name"
+                        <label className={"ms-1"}>Street Name:</label>
+                        <input className="form-control"
                                name="streetName"
                                required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Building Number"
+                        <label className={"ms-1"}>Building Number:</label>
+                        <input className="form-control"
                                name="houseNumber"
                                required
                                onChange={handleChange}/>
@@ -138,14 +144,16 @@ const VeterinarianAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="City"
+                        <label className={"ms-1"}>City:</label>
+                        <input className="form-control"
                                name="city"
                                required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Postal Code"
+                        <label className={"ms-1"}>Postal Code:</label>
+                        <input className="form-control"
                                name="postalCode"
                                required
                                onChange={handleChange}/>
@@ -154,6 +162,7 @@ const VeterinarianAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>Date of Employment:</label>
                         <input className="form-control" type={"date"}
                                name="dateOfEmployment"
                                required
@@ -161,7 +170,7 @@ const VeterinarianAdd = () => {
                     </div>
                 </div>
 
-                <div className="row mb-3">
+                <div className="row mb-3 mt-4">
                     <div className="col">
                         <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>

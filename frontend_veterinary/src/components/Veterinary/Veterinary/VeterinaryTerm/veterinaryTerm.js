@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 
 const veterinaryTerm = (props) => {
 
@@ -15,7 +14,7 @@ const veterinaryTerm = (props) => {
                         </div>
                     </div>
                 </td>
-                <td className={"text-right"}>
+                <td className={"text-right roboto-font"}>
                     <a title={"Veterinary"} className={"btn btn-outline-success m-2"} href={`/veterinary/${props.term.id.id}`}>View</a>
                     <a title={"Add Veterinarian"} className={"btn btn-outline-success m-2"} href={`/veterinary/${props.term.id.id}/veterinarian`}>Add Veterinarian</a>
                     <a title={"Edit"} className={"btn btn-outline-success m-2"} href={`/veterinary/edit/${props.term.id.id}`}>Edit</a>

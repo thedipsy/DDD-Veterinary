@@ -71,10 +71,11 @@ const VeterinaryEdit = () => {
                 </h5>
             </div>
 
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={onFormSubmit} className={"roboto-font"}>
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>Vet Clinic Name:</label>
                         <input className="form-control" placeholder={veterinary.name}
                                name="name"
                                onChange={handleChange}/>
@@ -83,12 +84,14 @@ const VeterinaryEdit = () => {
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>Street Name:</label>
                         <input className="form-control" placeholder={veterinary.address.streetName}
                                name="streetName"
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
+                        <label className={"ms-1"}>Building Number:</label>
                         <input className="form-control" placeholder={veterinary.address.houseNumber}
                                name="houseNumber"
                                onChange={handleChange}/>
@@ -97,19 +100,21 @@ const VeterinaryEdit = () => {
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>City:</label>
                         <input className="form-control" placeholder={veterinary.address.city}
                                name="city"
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
+                        <label className={"ms-1"}>Postal Code:</label>
                         <input className="form-control" placeholder={veterinary.address.postalCode}
                                name="postalCode"
                                onChange={handleChange}/>
                     </div>
                 </div>
 
-                <div className="row mb-3">
+                <div className="row mb-3 mt-4">
                     <div className="col">
                         <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>

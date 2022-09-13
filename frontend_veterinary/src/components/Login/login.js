@@ -61,7 +61,7 @@ const Login = () => {
                                            placeholder="Password" name={"password"} onChange={handleChange}/>
                                 </div>
                             </div>
-                            <div className="d-grid gap-2">
+                            <div className="d-grid gap-2 mt-4">
                                 <button type="submit" className="btn btn-success btn-lg btn-block" onClick={onFormSubmit}>Sign in</button>
                             </div>
                         </form>

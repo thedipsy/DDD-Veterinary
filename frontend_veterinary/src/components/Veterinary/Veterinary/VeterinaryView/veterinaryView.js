@@ -54,19 +54,18 @@ const VeterinaryView = () => {
                             <h1 className="mt-2 mb-3 link-class">
                                 {veterinary.name}
                             </h1>
-                            <a href={`/veterinary/${id}/veterinarian`} className="btn btn-block btn-dark add-product-btn">Add a veterinarian</a>
-                            <a title={"Edit"} className={"btn btn-outline-success m-2"} href={`/veterinary/edit/${id}`}>Edit Veterinary</a>
-                            <a title={"Delete"} className={"btn btn-outline-danger m-2"} href={"/veterinary"} onClick={() => deleteVeterinary(id)}>Delete Veterinary</a>
+                            <a href={`/veterinary/${id}/veterinarian`} className="btn btn-block btn-dark add-product-btn roboto-font">Add a veterinarian</a>
+                            <a title={"Edit"} className={"btn btn-outline-success m-2 roboto-font"} href={`/veterinary/edit/${id}`}>Edit Veterinary</a>
+                            <a title={"Delete"} className={"btn btn-outline-danger m-2 roboto-font"} href={"/veterinary"} onClick={() => deleteVeterinary(id)}>Delete Veterinary</a>
 
                         </div>
                     </div>
-                    <div className="table-responsive">
-                        <table className="table">
+                        <table className="table table-striped">
                             <thead>
-                            <tr>
-                                <th scope="col">Veterinarians</th>
-                                <th scope="col"/>
-                            </tr>
+                                <tr>
+                                    <th scope="col" className={"roboto-font"}>Veterinarians</th>
+                                    <th scope="col"/>
+                                </tr>
                             </thead>
                             <tbody>
                             {veterinary.veterinarians.length === 0 ?
@@ -78,7 +77,6 @@ const VeterinaryView = () => {
                             })}
                             </tbody>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>

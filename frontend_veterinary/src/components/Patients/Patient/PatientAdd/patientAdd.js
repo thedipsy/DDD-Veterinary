@@ -87,11 +87,12 @@ const PatientAdd = () => {
                 </h5>
             </div>
 
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={onFormSubmit} className={"roboto-font"}>
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Name" name={"name"}
+                        <label className={"ms-1"}>Name:</label>
+                        <input className="form-control" name={"name"}
                                required
                                onChange={handleChange}/>
                     </div>
@@ -99,7 +100,8 @@ const PatientAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <select className="form-control" placeholder="Animal Specie" name={"animalSpecie"}
+                        <label className={"ms-1"}>Animal Specie:</label>
+                        <select className="form-control" name={"animalSpecie"}
                                required
                                 onChange={handleChange}>
                             {animalSpecies.map((term) => {
@@ -111,7 +113,8 @@ const PatientAdd = () => {
                     </div>
 
                     <div className="col">
-                        <input className="form-control" placeholder="Breed" name={"breed"}
+                        <label className={"ms-1"}>Breed:</label>
+                        <input className="form-control" name={"breed"}
                                required
                                onChange={handleChange}/>
                     </div>
@@ -119,11 +122,13 @@ const PatientAdd = () => {
 
                 <div className="row mb-3">
                     <div className="col">
-                        <input className="form-control" placeholder="Microchip Serial Number" name={"serialNumber"}
+                        <label className={"ms-1"}>Microchip Serial Number:</label>
+                        <input className="form-control" name={"serialNumber"}
                                onChange={handleChange}/>
                     </div>
                     <div className="col">
-                        <input className="form-control" placeholder="Microchip Date Implemented" name={"dateImplemented"}
+                        <label className={"ms-1"}>Microchip Date Implemented:</label>
+                        <input className="form-control" name={"dateImplemented"}
                                type={"date"}
                                onChange={handleChange}/>
                     </div>
@@ -133,12 +138,14 @@ const PatientAdd = () => {
                 <div className="row mb-3">
 
                     <div className="col">
-                        <input className="form-control" placeholder="Weight" name={"amount"}
+                        <label className={"ms-1"}>Weight:</label>
+                        <input className="form-control" name={"amount"}
                                required
                                onChange={handleChange}/>
                     </div>
 
                     <div className="col">
+                        <label className={"ms-1"}>Weight Unit:</label>
                         <select className="form-control" placeholder="Weight Base Unit" name={"baseUnit"}
                                 required
                                 onChange={handleChange}>
@@ -152,32 +159,36 @@ const PatientAdd = () => {
 
 
                     <div className={"col"}>
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="gender"
-                                   value="MALE"
-                                   required
-                                   onChange={handleChange}/>
-                                <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="gender"
-                                   value="FEMALE"
-                                   required
-                                   onChange={handleChange}/>
-                                <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
+                        <label className={"ms-1"}>Gender:</label>
+                        <div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="gender"
+                                       value="MALE"
+                                       required
+                                       onChange={handleChange}/>
+                                    <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="gender"
+                                       value="FEMALE"
+                                       required
+                                       onChange={handleChange}/>
+                                    <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col">
+                        <label className={"ms-1"}>Date of Birth:</label>
                         <input className="form-control" placeholder="Birth Date" name={"birthDate"} type={"date"}
                                required
                                onChange={handleChange}/>
                     </div>
                 </div>
 
-                <div className="row mb-3">
+                <div className="row mb-3 mt-4">
                     <div className="col">
                         <button type="submit" className="btn btn-success btn-lg btn-block w-100">Submit</button>
                     </div>

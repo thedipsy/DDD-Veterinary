@@ -31,7 +31,7 @@ const Owners = () => {
 
                 <div className="row mb-5">
                     <div className="col-sm-12 col-md-12">
-                        <a href="/owners/add" className="btn btn-block btn-dark add-product-btn">
+                        <a href={"/owners/add"} className="btn btn-block btn-dark add-product-btn">
                             Add a new owner
                         </a>
                     </div>
@@ -40,6 +40,12 @@ const Owners = () => {
                 <div className={"row"}>
                     <div className={"row"}>
                         <table className={"table table-striped"}>
+                            <thead>
+                            <tr>
+                                <th scope="col" className={"roboto-font"}>Owners</th>
+                                <th scope="col"/>
+                            </tr>
+                            </thead>
                             <tbody>
                             {owners.length === 0 ?
                                 <h4 className={"m-3 text-black-50"}>No owners.</h4> :
